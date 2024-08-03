@@ -34,6 +34,6 @@ public class MainUI extends JFrame {
         add(mp);
     }
 
-    private final ComponentResizer cr  = new ComponentResizer();
+    private final ComponentResizer cr = new ComponentResizer();
     private final MainPanel mp = new MainPanel();
 }
