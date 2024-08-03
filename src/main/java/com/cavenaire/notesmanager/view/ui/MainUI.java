@@ -2,6 +2,8 @@ package com.cavenaire.notesmanager.view.ui;
 
 import rob.camick.tools.ComponentResizer;
 
+import com.cavenaire.notesmanager.view.utils.FontLoader;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,9 +11,6 @@ import java.awt.*;
  * Main UI Window that contains MainPanel. It's undecorated and capable of resize.
  */
 public class MainUI extends JFrame {
-
-    private final ComponentResizer cr  = new ComponentResizer();
-    private final MainPanel mp = new MainPanel();
 
     public MainUI() {
         super();
@@ -30,6 +29,11 @@ public class MainUI extends JFrame {
         cr.setSnapSize(new Dimension(1, 1));
         cr.registerComponent(this);
 
+        FontLoader.loadFonts();
+
         add(mp);
     }
+
+    private final ComponentResizer cr  = new ComponentResizer();
+    private final MainPanel mp = new MainPanel();
 }
