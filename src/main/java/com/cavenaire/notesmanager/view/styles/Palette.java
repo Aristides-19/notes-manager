@@ -36,4 +36,9 @@ public class Palette {
      */
     public static Color SECONDARY_BACKGROUND = new Color(255, 255, 255, 255);
     public static String SECONDARY_BACKGROUND_HEX = "#FFFFFF";
+    /**
+     * BORDER color, table borders and separators.
+     */
+    public static Color BORDER = new Color(22, 27, 70, 25);
+    public static String BORDER_HEX = "#161B4619";
 }

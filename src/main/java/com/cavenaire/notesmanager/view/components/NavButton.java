@@ -28,9 +28,9 @@ public class NavButton extends JButton {
         setBorder(new EmptyBorder(0, 33, 0, 0));
 
         putClientProperty("FlatLaf.style",
-                "background : " + Palette.SECONDARY_BACKGROUND_HEX + ";" +
-                        "hoverBackground : " + Palette.SECONDARY_BACKGROUND_HEX + ";" +
-                        "pressedBackground : " + Palette.BACKGROUND_HEX);
+                "background : " + Palette.SECONDARY_BACKGROUND_HEX +
+                        "; hoverBackground : " + Palette.SECONDARY_BACKGROUND_HEX +
+                        "; pressedBackground : " + Palette.BACKGROUND_HEX);
 
         setCursor(new Cursor(Cursor.HAND_CURSOR));
 
