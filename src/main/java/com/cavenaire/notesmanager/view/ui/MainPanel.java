@@ -4,6 +4,7 @@ import net.miginfocom.swing.MigLayout;
 
 import com.cavenaire.notesmanager.view.bars.*;
 import com.cavenaire.notesmanager.view.menus.*;
+import com.cavenaire.notesmanager.view.styles.Palette;
 
 import javax.swing.*;
 
@@ -19,6 +20,8 @@ class MainPanel extends JPanel {
 
     private void init() {
         setLayout(new MigLayout("insets 0, gap 0 0", "[fill]", "[fill]"));
+
+        putClientProperty("FlatLaf.style", "background : " + Palette.BACKGROUND_HEX);
 
         add(navBar, "span 1 2, w n:272:n");
         add(titleBar, "wrap, pushx, h 50!");

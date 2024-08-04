@@ -1,6 +1,7 @@
 package com.cavenaire.notesmanager.view.bars;
 
 import com.cavenaire.notesmanager.view.components.NavButton;
+import com.cavenaire.notesmanager.view.styles.Palette;
 import com.cavenaire.notesmanager.view.utils.SVGIcon;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
@@ -21,7 +22,7 @@ public class NavBar extends JPanel {
     private void init() {
         setLayout(new MigLayout("insets 5px 0px 12px 0px, flowy", "[grow]", "[top]"));
 
-        putClientProperty("FlatLaf.style", "background : #FFFFFF");
+        putClientProperty("FlatLaf.style", "background : " + Palette.SECONDARY_BACKGROUND_HEX);
 
         add(logo, "center, gap top 75px");
         add(menu, "center, gap top 75px, grow, pushx");
@@ -32,14 +33,14 @@ public class NavBar extends JPanel {
         add(settings, "center, growx, push, bottom");
         add(help, "center, grow");
 
-        clients.setSelected(true);
+        menu.setSelected(true);
     }
 
     private final SVGIcon logo = new SVGIcon("images/Logo.svg", 219, 37);
-    private final NavButton menu = new NavButton(new FlatSVGIcon("images/navBar/Menu.svg", 25, 25), "Menú");
-    private final NavButton invoice = new NavButton(new FlatSVGIcon("images/navBar/Invoice.svg", 25, 25), "Facturas");
-    private final NavButton notes = new NavButton(new FlatSVGIcon("images/navBar/Notes.svg", 25, 25), "Notas de Entrega");
-    private final NavButton clients = new NavButton(new FlatSVGIcon("images/navBar/Clients.svg", 25, 25), "Clientes");
-    private final NavButton settings = new NavButton(new FlatSVGIcon("images/navBar/Settings.svg", 25, 25), "Configuración");
-    private final NavButton help = new NavButton(new FlatSVGIcon("images/navBar/Help.svg", 25, 25), "Ayuda");
+    private final NavButton menu = new NavButton(new FlatSVGIcon("images/navBar/Menu.svg"), "Menú");
+    private final NavButton invoice = new NavButton(new FlatSVGIcon("images/navBar/Invoice.svg"), "Facturas");
+    private final NavButton notes = new NavButton(new FlatSVGIcon("images/navBar/Notes.svg"), "Notas de Entrega");
+    private final NavButton clients = new NavButton(new FlatSVGIcon("images/navBar/Clients.svg"), "Clientes");
+    private final NavButton settings = new NavButton(new FlatSVGIcon("images/navBar/Settings.svg"), "Configuración");
+    private final NavButton help = new NavButton(new FlatSVGIcon("images/navBar/Help.svg"), "Ayuda");
 }

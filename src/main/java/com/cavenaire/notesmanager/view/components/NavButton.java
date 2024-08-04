@@ -1,5 +1,7 @@
 package com.cavenaire.notesmanager.view.components;
 
+import com.cavenaire.notesmanager.view.styles.Palette;
+
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 
 import javax.swing.*;
@@ -26,9 +28,9 @@ public class NavButton extends JButton {
         setBorder(new EmptyBorder(0, 33, 0, 0));
 
         putClientProperty("FlatLaf.style",
-                "background : #FFFFFF;" +
-                        "hoverBackground : #FFFFFF;" +
-                        "pressedBackground : #F9F9F9");
+                "background : " + Palette.SECONDARY_BACKGROUND_HEX + ";" +
+                        "hoverBackground : " + Palette.SECONDARY_BACKGROUND_HEX + ";" +
+                        "pressedBackground : " + Palette.BACKGROUND_HEX);
 
         setCursor(new Cursor(Cursor.HAND_CURSOR));
 
@@ -39,17 +41,15 @@ public class NavButton extends JButton {
     @Override
     public void setSelected(boolean selected) {
         if (selected) {
-            setForeground(selectedColor);
-            colorFilter.add(Color.BLACK, selectedColor);
+            setForeground(Palette.MAIN);
+            colorFilter.add(Color.BLACK, Palette.MAIN);
         } else {
-            setForeground(unselectedColor);
-            colorFilter.add(Color.BLACK, unselectedColor);
+            setForeground(Palette.UNSELECT);
+            colorFilter.add(Color.BLACK, Palette.UNSELECT);
         }
         setIcon(icon);
     }
 
     private final FlatSVGIcon icon;
-    private final Color selectedColor = new Color(22, 27, 70, 229);
-    private final Color unselectedColor = new Color(22, 27, 70, 127);
     private final FlatSVGIcon.ColorFilter colorFilter = new FlatSVGIcon.ColorFilter();
 }
