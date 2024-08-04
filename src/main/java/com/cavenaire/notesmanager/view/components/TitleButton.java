@@ -83,12 +83,13 @@ public class TitleButton extends JButton {
         }
     }
 
+    // VARIABLES
     private final ButtonType type;
-    private final FlatSVGIcon icon;
-    private FlatSVGIcon resizeIcon;
     private byte state;
 
-    public enum ButtonType {
-        CLOSE, MAXIMIZE, MINIMIZE
-    }
+    public enum ButtonType {CLOSE, MAXIMIZE, MINIMIZE}
+
+    // ICONS
+    private final FlatSVGIcon icon;
+    private FlatSVGIcon resizeIcon;
 }

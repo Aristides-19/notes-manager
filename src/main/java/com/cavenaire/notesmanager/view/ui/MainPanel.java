@@ -28,6 +28,7 @@ class MainPanel extends JPanel {
         add(dashboard, "push");
     }
 
+    // COMPONENTS
     private final NavBar navBar = new NavBar();
     private final TitleBar titleBar = new TitleBar();
     private final Dashboard dashboard = new Dashboard();

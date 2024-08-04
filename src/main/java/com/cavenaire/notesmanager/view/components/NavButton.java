@@ -50,6 +50,7 @@ public class NavButton extends JButton {
         setIcon(icon);
     }
 
+    // ICON
     private final FlatSVGIcon icon;
     private final FlatSVGIcon.ColorFilter colorFilter = new FlatSVGIcon.ColorFilter();
 }
