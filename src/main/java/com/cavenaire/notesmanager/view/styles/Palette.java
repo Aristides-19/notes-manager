@@ -17,15 +17,15 @@ public class Palette {
     public static Color UNSELECT = new Color(22, 27, 70, 127);
     public static String UNSELECT_HEX = "#161B467F";
     /**
-     * TITLE_TEXT color, title text showed in each menu panel.
+     * TITLE_TEXT color, title text and buttons showed in each menu panel.
      */
-    public static Color TITLE_TEXT = new Color(22, 27, 70, 191);
-    public static String TITLE_TEXT_HEX = "#161B46BF";
+    public static Color MENU = new Color(22, 27, 70, 191);
+    public static String MENU_HEX = "#161B46BF";
     /**
-     * MENU_BUTTON color, menu panel buttons.
+     * MENU_BUTTON color, menu panel pressed buttons.
      */
-    public static Color MENU_BUTTON = new Color(22, 27, 70, 204);
-    public static String MENU_BUTTON_HEX = "#161B46CC";
+    public static Color MENU_PRESSED = new Color(22, 27, 70, 204);
+    public static String MENU_PRESSED_HEX = "#161B46CC";
     /**
      * FRAME_BACKGROUND color, background of menu panels.
      */

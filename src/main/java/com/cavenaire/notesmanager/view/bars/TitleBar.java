@@ -31,8 +31,8 @@ public class TitleBar extends JPanel {
     }
 
     // COMPONENTS
-    private final TitleButton close = new TitleButton(new FlatSVGIcon("images/TitleBar/Close.svg"), TitleButton.ButtonType.CLOSE);
-    private final TitleButton maximize = new TitleButton(new FlatSVGIcon("images/TitleBar/Maximize.svg"), TitleButton.ButtonType.MAXIMIZE, new FlatSVGIcon("images/TitleBar/Resize.svg"));
-    private final TitleButton minimize = new TitleButton(new FlatSVGIcon("images/TitleBar/Minimize.svg"), TitleButton.ButtonType.MINIMIZE);
+    private final TitleButton close = new TitleButton(new FlatSVGIcon("images/titlebar/close.svg"), TitleButton.ButtonType.CLOSE);
+    private final TitleButton maximize = new TitleButton(new FlatSVGIcon("images/titlebar/maximize.svg"), TitleButton.ButtonType.MAXIMIZE, new FlatSVGIcon("images/titlebar/resize.svg"));
+    private final TitleButton minimize = new TitleButton(new FlatSVGIcon("images/titlebar/minimize.svg"), TitleButton.ButtonType.MINIMIZE);
     private final JSeparator sep = new JSeparator();
 }

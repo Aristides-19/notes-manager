@@ -21,6 +21,7 @@ public class NavBar extends JPanel {
 
     private void init() {
         setLayout(new MigLayout("insets 5px 0px 12px 0px, flowy", "[grow]", "[top]"));
+
         putClientProperty("FlatLaf.style", "background : " + Palette.SECONDARY_BACKGROUND_HEX +
                 "; border : 0,1,0,1,fadeout(#161B46,90%),,0");
 
@@ -37,11 +38,11 @@ public class NavBar extends JPanel {
     }
 
     // COMPONENTS
-    private final SVGIcon logo = new SVGIcon("images/Logo.svg", 219, 37);
-    private final NavButton menu = new NavButton(new FlatSVGIcon("images/NavBar/Menu.svg"), "Menú");
-    private final NavButton invoice = new NavButton(new FlatSVGIcon("images/NavBar/Invoice.svg"), "Facturas");
-    private final NavButton notes = new NavButton(new FlatSVGIcon("images/NavBar/Notes.svg"), "Notas de Entrega");
-    private final NavButton clients = new NavButton(new FlatSVGIcon("images/NavBar/Clients.svg"), "Clientes");
-    private final NavButton settings = new NavButton(new FlatSVGIcon("images/NavBar/Settings.svg"), "Configuración");
-    private final NavButton help = new NavButton(new FlatSVGIcon("images/NavBar/Help.svg"), "Ayuda");
+    private final SVGIcon logo = new SVGIcon("images/logo.svg", 219, 37);
+    private final NavButton menu = new NavButton(new FlatSVGIcon("images/navbar/menu.svg"), "Menú");
+    private final NavButton invoice = new NavButton(new FlatSVGIcon("images/navbar/invoice.svg"), "Facturas");
+    private final NavButton notes = new NavButton(new FlatSVGIcon("images/navbar/notes.svg"), "Notas de Entrega");
+    private final NavButton clients = new NavButton(new FlatSVGIcon("images/navbar/clients.svg"), "Clientes");
+    private final NavButton settings = new NavButton(new FlatSVGIcon("images/navbar/settings.svg"), "Configuración");
+    private final NavButton help = new NavButton(new FlatSVGIcon("images/navbar/help.svg"), "Ayuda");
 }
