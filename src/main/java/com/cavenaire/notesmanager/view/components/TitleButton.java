@@ -36,13 +36,12 @@ public class TitleButton extends JButton {
     }
 
     private void init() {
-        setMinimumSize(new Dimension(18, 18));
+        setMinimumSize(SIZE);
         setHorizontalAlignment(SwingConstants.CENTER);
         setVerticalAlignment(SwingConstants.CENTER);
-        setBorder(new EmptyBorder(0, 0, 0, 0));
-
+        setBorder(BORDER);
         setContentAreaFilled(false);
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
+        setCursor(CURSOR);
     }
 
     private void initHandler() {
@@ -92,4 +91,9 @@ public class TitleButton extends JButton {
     // ICONS
     private final FlatSVGIcon icon;
     private FlatSVGIcon resizeIcon;
+
+    // COMMONS
+    private static final EmptyBorder BORDER = new EmptyBorder(0, 0, 0, 0);
+    private static final Cursor CURSOR = new Cursor(Cursor.HAND_CURSOR);
+    private static final Dimension SIZE = new Dimension(18, 18);
 }

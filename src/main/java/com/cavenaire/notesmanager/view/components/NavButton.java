@@ -20,19 +20,19 @@ public class NavButton extends JButton {
     }
 
     public void init() {
-        setMinimumSize(new Dimension(getWidth(), 55));
+        setMinimumSize(SIZE);
         setIconTextGap(18);
         setHorizontalAlignment(SwingConstants.LEADING);
         setVerticalAlignment(SwingConstants.CENTER);
-        setFont(new Font("Satoshi Bold", Font.BOLD, 18));
-        setBorder(new EmptyBorder(0, 33, 0, 0));
+        setFont(FONT);
+        setBorder(BORDER);
 
         putClientProperty("FlatLaf.style",
                 "background : " + Palette.SECONDARY_BACKGROUND_HEX +
                         "; hoverBackground : " + Palette.SECONDARY_BACKGROUND_HEX +
                         "; pressedBackground : " + Palette.BACKGROUND_HEX);
 
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
+        setCursor(CURSOR);
 
         icon.setColorFilter(colorFilter);
         setSelected(false);
@@ -53,4 +53,10 @@ public class NavButton extends JButton {
     // ICON
     private final FlatSVGIcon icon;
     private final FlatSVGIcon.ColorFilter colorFilter = new FlatSVGIcon.ColorFilter();
+
+    // COMMONS
+    private static final Cursor CURSOR = new Cursor(Cursor.HAND_CURSOR);
+    private static final Font FONT = new Font("Satoshi Bold", Font.BOLD, 18);
+    private static final EmptyBorder BORDER = new EmptyBorder(0, 33, 0, 0);
+    private static final Dimension SIZE = new Dimension(0, 55);
 }
