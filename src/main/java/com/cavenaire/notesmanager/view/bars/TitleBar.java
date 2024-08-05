@@ -19,8 +19,11 @@ public class TitleBar extends JPanel {
     }
 
     private void init() {
+        // right-to-left so, left is right and right is left LOL
         setLayout(new MigLayout("rtl, insets 15 22 0 27",
-                "[right]", ""));
+                "[right]"));
+
+        putClientProperty("FlatLaf.style", "background : " + Palette.BACKGROUND_HEX);
 
         add(close, "split 3, gapright 30");
         add(maximize, "gapright 34");
