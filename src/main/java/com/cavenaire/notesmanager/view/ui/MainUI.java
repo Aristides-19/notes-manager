@@ -58,7 +58,7 @@ public class MainUI extends JFrame {
     }
 
     public static void setResized() {
-        MAIN_FRAME.initCResizer();
+        MAIN_FRAME.cr.registerComponent(MAIN_FRAME);
         MAIN_FRAME.setSize(1280, 800);
         MAIN_FRAME.setLocationRelativeTo(null);
     }
