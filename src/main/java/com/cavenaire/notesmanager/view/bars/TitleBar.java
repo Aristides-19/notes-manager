@@ -19,7 +19,7 @@ public class TitleBar extends JPanel {
     }
 
     private void init() {
-        setLayout(new MigLayout("rtl, insets 15 27 0 27",
+        setLayout(new MigLayout("rtl, insets 15 22 0 27",
                 "[right]", ""));
 
         add(close, "split 3, gapright 30");

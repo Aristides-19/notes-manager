@@ -24,7 +24,7 @@ class MainPanel extends JPanel {
         putClientProperty("FlatLaf.style", "background : " + Palette.BACKGROUND_HEX);
 
         add(navBar, "span 1 2, w n:272:n");
-        add(titleBar, "wrap, pushx, h 55!, gaptop 5");
+        add(titleBar, "wrap, pushx, h 55!, gaptop 5, gapright 5");
         add(dashboard, "push");
     }
 

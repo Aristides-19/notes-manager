@@ -9,19 +9,16 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Main UI Window that contains MainPanel. It's undecorated and capable of resize.
+ * Singleton Main UI Window that contains MainPanel.
  */
 public class MainUI extends JFrame {
 
     public static void execute() {
-        if (!SINGLETON) {
-            SINGLETON = true;
-            MAIN_FRAME = new MainUI();
-        }
+        INSTANCE = INSTANCE == null ? new MainUI() : null;
     }
 
     private MainUI() {
-        super();
+        super("Cavenaire Manager");
         init();
         setVisible(true);
     }
@@ -48,27 +45,26 @@ public class MainUI extends JFrame {
     }
 
     public static void setMinimized() {
-        MAIN_FRAME.setExtendedState(JFrame.ICONIFIED);
+        INSTANCE.setExtendedState(JFrame.ICONIFIED);
     }
 
     public static void setMaximized() {
-        MAIN_FRAME.cr.deregisterComponent(MAIN_FRAME);
-        MAIN_FRAME.setSize(screenSize.width, screenSize.height - taskBarSize);
-        MAIN_FRAME.setLocation(0, 0);
+        INSTANCE.cr.deregisterComponent(INSTANCE);
+        INSTANCE.setSize(screenSize.width, screenSize.height - taskBarSize);
+        INSTANCE.setLocation(0, 0);
     }
 
     public static void setResized() {
-        MAIN_FRAME.cr.registerComponent(MAIN_FRAME);
-        MAIN_FRAME.setSize(1280, 800);
-        MAIN_FRAME.setLocationRelativeTo(null);
+        INSTANCE.cr.registerComponent(INSTANCE);
+        INSTANCE.setSize(1280, 800);
+        INSTANCE.setLocationRelativeTo(null);
     }
 
     // VARIABLES
     private final MainPanel mp = new MainPanel();
     private final ComponentResizer cr = new ComponentResizer(this);
     private final ComponentMover cm = new ComponentMover(JFrame.class, mp.getComponent(1));
-    private static MainUI MAIN_FRAME;
-    private static boolean SINGLETON = false;
+    private static MainUI INSTANCE;
 
     // WINDOW DIMENSIONS
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

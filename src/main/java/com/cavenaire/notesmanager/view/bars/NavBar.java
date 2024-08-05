@@ -23,7 +23,7 @@ public class NavBar extends JPanel {
         setLayout(new MigLayout("insets 5px 0px 12px 0px, flowy", "[grow]", "[top]"));
 
         putClientProperty("FlatLaf.style", "background : " + Palette.SECONDARY_BACKGROUND_HEX +
-                "; border : 0,1,0,1,fadeout(#161B46,90%),,0");
+                "; border : 0,0,0,2," + Palette.BORDER_HEX + ",1,0");
 
         add(logo, "center, gap top 75px");
         add(menu, "center, gap top 75px, grow, pushx");
