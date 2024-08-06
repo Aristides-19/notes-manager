@@ -10,6 +10,9 @@ import javax.swing.*;
 
 /**
  * Main UI Container, it instantiates Navigation Bar, Title Bar, and Menus.
+ *
+ * @see com.cavenaire.notesmanager.view.bars
+ * @see com.cavenaire.notesmanager.view.menus
  */
 class MainPanel extends JPanel {
 
@@ -26,7 +29,7 @@ class MainPanel extends JPanel {
         displayScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         displayScrollPane.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
-        add(navBar, "span 1 2, w n:272:n");
+        add(navBar, "span 1 2, w 255:272:n");
         add(titleBar, "wrap, pushx, h 55!, gaptop 5, gapright 5");
         add(displayScrollPane, "push, gapbottom 5, gapright 5");
     }

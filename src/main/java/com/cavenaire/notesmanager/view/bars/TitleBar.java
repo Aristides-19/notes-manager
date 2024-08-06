@@ -10,6 +10,8 @@ import javax.swing.*;
 
 /**
  * Title Bar, it brings the capability to close, minimize and maximize window App.
+ *
+ * @see com.cavenaire.notesmanager.view.components.TitleButton
  */
 public class TitleBar extends JPanel {
 

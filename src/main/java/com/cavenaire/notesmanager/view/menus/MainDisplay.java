@@ -15,8 +15,8 @@ public class MainDisplay extends JPanel {
     }
 
     private void init() {
-        setLayout(new MigLayout("debug, insets 0"));
-        add(dashboard, "push, grow");
+        setLayout(new MigLayout("insets 0"));
+        add(dashboard, "push, grow, wmin 900");
     }
 
     // DISPLAY PANELS

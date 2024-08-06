@@ -10,7 +10,9 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JPanel;
 
 /**
- * Side Navigation Bar, it'll be there in any showed frame, never disappears.
+ * Side Navigation Bar, it will be there in any showed frame, never disappears.
+ *
+ * @see com.cavenaire.notesmanager.view.components.NavButton
  */
 public class NavBar extends JPanel {
 

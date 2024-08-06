@@ -10,6 +10,9 @@ import java.awt.*;
 
 /**
  * Singleton Main UI Window that contains MainPanel.
+ *
+ * @see com.cavenaire.notesmanager.view.ui.MainPanel
+ * @see com.cavenaire.notesmanager.view.utils.FontLoader
  */
 public class MainUI extends JFrame {
 

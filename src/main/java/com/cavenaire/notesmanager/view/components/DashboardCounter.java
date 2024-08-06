@@ -10,9 +10,9 @@ import java.awt.*;
 /**
  * Dashboard Counter Panel, it shows a counter for specified info.
  */
-public class MenuCounter extends JPanel {
+public class DashboardCounter extends JPanel {
 
-    public MenuCounter(FlatSVGIcon icon, String text, String initialCount) {
+    public DashboardCounter(FlatSVGIcon icon, String text, String initialCount) {
         super();
         initComponents(icon, text, initialCount);
         init();
