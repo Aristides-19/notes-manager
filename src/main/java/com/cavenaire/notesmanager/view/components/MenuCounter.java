@@ -51,6 +51,9 @@ public class MenuCounter extends JPanel {
         this.icon.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.counter.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.text.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        this.counter.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+        this.text.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
     }
 
     // COMPONENTS

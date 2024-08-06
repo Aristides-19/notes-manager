@@ -5,7 +5,7 @@ import com.cavenaire.notesmanager.view.styles.Palette;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
+import javax.swing.border.Border;
 import java.awt.*;
 
 /**
@@ -57,6 +57,6 @@ public class NavButton extends JButton {
     // COMMONS
     private static final Cursor CURSOR = new Cursor(Cursor.HAND_CURSOR);
     private static final Font FONT = new Font("Satoshi Bold", Font.BOLD, 18);
-    private static final EmptyBorder BORDER = new EmptyBorder(0, 33, 0, 0);
+    private static final Border BORDER = BorderFactory.createEmptyBorder(0, 33, 0, 0);
     private static final Dimension SIZE = new Dimension(0, 55);
 }

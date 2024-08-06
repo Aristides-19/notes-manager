@@ -7,7 +7,6 @@ import com.cavenaire.notesmanager.view.menus.MainDisplay;
 import com.cavenaire.notesmanager.view.styles.Palette;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 /**
  * Main UI Container, it instantiates Navigation Bar, Title Bar, and Menus.
@@ -25,7 +24,7 @@ class MainPanel extends JPanel {
         putClientProperty("FlatLaf.style", "background : " + Palette.BACKGROUND_HEX);
 
         displayScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-        displayScrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+        displayScrollPane.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
         add(navBar, "span 1 2, w n:272:n");
         add(titleBar, "wrap, pushx, h 55!, gaptop 5, gapright 5");
