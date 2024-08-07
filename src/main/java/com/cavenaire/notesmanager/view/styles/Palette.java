@@ -10,7 +10,7 @@ public class Palette {
      * MAIN color, used in icons and texts.
      */
     public static Color MAIN = new Color(22, 27, 70, 229);
-    public static String MAIN_HEX = "#161B46E5";
+    public static String MAIN_HEX = "#2E3259";
     /**
      * UNSELECT color, navigation bar buttons to show selection.
      */

@@ -26,6 +26,7 @@ public class Dashboard extends JPanel {
         add(appInfo, "push, grow");
     }
 
+    // PANELS
     private final TaskBar taskBar = new TaskBar();
     private final Counters appInfo = new Counters();
 }

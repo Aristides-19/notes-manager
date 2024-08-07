@@ -1,10 +1,13 @@
 package com.cavenaire.notesmanager.view.components;
 
+import com.cavenaire.notesmanager.view.styles.FontPalette;
 import com.cavenaire.notesmanager.view.styles.Palette;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 /**
@@ -19,41 +22,34 @@ public class DashboardCounter extends JPanel {
     }
 
     private void init() {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new MigLayout("flowy, al center center",
+                "[center]", "[]15[]3[]"));
 
         putClientProperty("FlatLaf.style", "background : " + Palette.SECONDARY_BACKGROUND_HEX +
                 "; border : 0,0,0,0," + Palette.BORDER_HEX + ",1,15");
 
-        add(Box.createVerticalGlue());
-        add(this.icon);
-        add(Box.createVerticalStrut(20));
-        add(this.counter);
-        add(Box.createVerticalStrut(5));
-        add(this.text);
-        add(Box.createVerticalGlue());
+        add(icon);
+        add(counter);
+        add(text);
     }
 
     private void initComponents(FlatSVGIcon icon, String text, String initialCount) {
         this.counter.setText(initialCount);
         this.text.setText(text);
         icon.setColorFilter(new FlatSVGIcon.ColorFilter().add(Color.BLACK, Palette.MAIN));
-
-        String style = "background : " + Palette.SECONDARY_BACKGROUND_HEX +
-                "; foreground : " + Palette.MAIN_HEX;
+        String style = "foreground : " + Palette.MAIN_HEX;
 
         this.icon.setIcon(icon);
         this.counter.putClientProperty("FlatLaf.style", style);
         this.text.putClientProperty("FlatLaf.style", style);
 
-        this.counter.setFont(COUNTER_FONT);
-        this.text.setFont(TEXT_FONT);
+        this.counter.setFont(FontPalette.H0);
+        this.text.setFont(FontPalette.H2_REG);
 
-        this.icon.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.counter.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.text.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.icon.setBorder(BORDER);
+        this.counter.setBorder(BORDER);
+        this.text.setBorder(BORDER);
 
-        this.counter.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
-        this.text.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
     }
 
     // COMPONENTS
@@ -62,6 +58,5 @@ public class DashboardCounter extends JPanel {
     private final JLabel icon = new JLabel();
 
     // COMMONS
-    private static final Font COUNTER_FONT = new Font("Satoshi Bold", Font.BOLD, 24);
-    private static final Font TEXT_FONT = new Font("Satoshi Regular", Font.PLAIN, 17);
+    private static final Border BORDER = BorderFactory.createEmptyBorder(0, 5, 0, 0);
 }

@@ -1,5 +1,6 @@
 package com.cavenaire.notesmanager.view.components;
 
+import com.cavenaire.notesmanager.view.styles.FontPalette;
 import com.cavenaire.notesmanager.view.styles.Palette;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 
@@ -25,7 +26,7 @@ public class MenuButton extends JButton {
         setIconTextGap(iconGap);
         setHorizontalAlignment(SwingConstants.LEADING);
         setVerticalAlignment(SwingConstants.CENTER);
-        setFont(FONT);
+        setFont(FontPalette.H3);
 
         putClientProperty("FlatLaf.style",
                 "background : " + Palette.MENU_HEX +
@@ -39,6 +40,5 @@ public class MenuButton extends JButton {
 
     // COMMONS
     private static final Dimension SIZE = new Dimension(178, 45);
-    private static final Font FONT = new Font("Satoshi Bold", Font.BOLD, 15);
     private static final Cursor CURSOR = new Cursor(Cursor.HAND_CURSOR);
 }

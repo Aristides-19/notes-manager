@@ -1,5 +1,6 @@
 package com.cavenaire.notesmanager.view.components;
 
+import com.cavenaire.notesmanager.view.styles.FontPalette;
 import com.cavenaire.notesmanager.view.styles.Palette;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
@@ -24,7 +25,7 @@ public class NavButton extends JButton {
         setIconTextGap(18);
         setHorizontalAlignment(SwingConstants.LEADING);
         setVerticalAlignment(SwingConstants.CENTER);
-        setFont(FONT);
+        setFont(FontPalette.H1);
         setBorder(BORDER);
 
         putClientProperty("FlatLaf.style",
@@ -56,7 +57,6 @@ public class NavButton extends JButton {
 
     // COMMONS
     private static final Cursor CURSOR = new Cursor(Cursor.HAND_CURSOR);
-    private static final Font FONT = new Font("Satoshi Bold", Font.BOLD, 18);
     private static final Border BORDER = BorderFactory.createEmptyBorder(0, 33, 0, 0);
     private static final Dimension SIZE = new Dimension(0, 55);
 }

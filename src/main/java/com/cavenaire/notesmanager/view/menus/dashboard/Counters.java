@@ -31,6 +31,7 @@ public class Counters extends JPanel {
         add(juridical, "push, grow");
     }
 
+    // PANELS
     private final DashboardCounter invoice = new DashboardCounter(new FlatSVGIcon("images/menus/dashboard/invoice.svg"), "Facturas Registradas", "22");
     private final DashboardCounter clients = new DashboardCounter(new FlatSVGIcon("images/menus/dashboard/clients.svg"), "Clientes Registrados", "57");
     private final DashboardCounter natural = new DashboardCounter(new FlatSVGIcon("images/menus/dashboard/natural.svg"), "Jurídicos", "25");
