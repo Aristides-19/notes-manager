@@ -24,7 +24,7 @@ public class TitleButton extends JButton {
 
         setIcon(icon);
         init();
-        initHandler();
+        TitleButtonHandler.initHandler(this);
     }
 
     public TitleButton(FlatSVGIcon maxIcon, ButtonType type, FlatSVGIcon resizeIcon) {
@@ -44,30 +44,6 @@ public class TitleButton extends JButton {
         setCursor(CURSOR);
     }
 
-    private void initHandler() {
-        TitleButton button = this;
-        addActionListener(e -> {
-            switch (type) {
-                case CLOSE:
-                    TitleButtonHandler.onClose();
-                    break;
-                case MAXIMIZE:
-                    button.changeIconState();
-                    if (state == 0) {
-                        TitleButtonHandler.onMaximize();
-                        state = 1;
-                    } else {
-                        TitleButtonHandler.onResized();
-                        state = 0;
-                    }
-                    break;
-                case MINIMIZE:
-                    TitleButtonHandler.onMinimize();
-                    break;
-            }
-        });
-    }
-
     /**
      * Change icon to maximize/resize. It must be used only for maximized icon.
      *
@@ -80,6 +56,27 @@ public class TitleButton extends JButton {
         } else {
             setIcon(icon);
         }
+    }
+
+    /**
+     * Get ButtonType enum case.
+     */
+    public ButtonType getType() {
+        return type;
+    }
+
+    /**
+     * Get Maximize button icon state. (maximize == 0 and resize == 1)
+     */
+    public byte getState() {
+        return state;
+    }
+
+    /**
+     * Set Maximize button icon state. (maximize == 0 and resize == 1)
+     */
+    public void setState(byte state) {
+        this.state = state;
     }
 
     // VARIABLES
