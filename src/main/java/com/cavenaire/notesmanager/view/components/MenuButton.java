@@ -33,7 +33,7 @@ public class MenuButton extends JButton {
                         "; hoverBackground : " + Palette.MENU_HEX +
                         "; pressedBackground : " + Palette.MENU_PRESSED_HEX +
                         "; foreground : " + Palette.BACKGROUND_HEX +
-                        "; arc : 5 ; borderWidth : 0 ; margin : 0,26,0,0");
+                        "; arc : 10 ; borderWidth : 0 ; margin : 0,26,0,0");
 
         setCursor(CURSOR);
     }

@@ -21,12 +21,12 @@ public class Counters extends JPanel {
     }
 
     private void init() {
-        setLayout(new MigLayout("insets 40 55 40 55"));
+        setLayout(new MigLayout("insets 8 55 40 55"));
 
         putClientProperty("FlatLaf.style", "background : " + Palette.BACKGROUND_HEX);
 
         add(invoice, "push, grow, span 2 2, gapright 10");
-        add(clients, "push, grow, span 2 2, gapright 20");
+        add(clients, "push, grow, span 2 2, gapright 30");
         add(natural, "push, grow, wrap, gapbottom 10");
         add(juridical, "push, grow");
     }

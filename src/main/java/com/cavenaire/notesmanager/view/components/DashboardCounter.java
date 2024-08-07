@@ -58,5 +58,5 @@ public class DashboardCounter extends JPanel {
     private final JLabel icon = new JLabel();
 
     // COMMONS
-    private static final Border BORDER = BorderFactory.createEmptyBorder(0, 5, 0, 0);
+    private static final Border BORDER = BorderFactory.createEmptyBorder(0, 10, 0, 0);
 }
