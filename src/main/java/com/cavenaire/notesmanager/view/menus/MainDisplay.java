@@ -1,11 +1,14 @@
 package com.cavenaire.notesmanager.view.menus;
 
+import com.cavenaire.notesmanager.view.menus.dashboard.*;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 
 /**
  * App Main Display, It contains every menu Panel. It takes care of moving between menus according to nav bar.
+ *
+ * @see com.cavenaire.notesmanager.view.menus.Display
  */
 public class MainDisplay extends JPanel {
 
@@ -20,5 +23,5 @@ public class MainDisplay extends JPanel {
     }
 
     // DISPLAY PANELS
-    private final Dashboard dashboard = new Dashboard();
+    private final Display<TaskBar, Counters> dashboard = new Display<>(new TaskBar(), new Counters());
 }
