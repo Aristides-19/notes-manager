@@ -36,15 +36,15 @@ public class NavBar extends JPanel {
         add(settings, "center, growx, push, bottom");
         add(help, "center, grow");
 
-        menu.setSelected(true);
+        menu.setSelected();
     }
 
     // COMPONENTS
     private final SVGIcon logo = new SVGIcon("images/logo.svg", 219, 37);
-    private final NavButton menu = new NavButton(new FlatSVGIcon("images/navbar/menu.svg"), "Menú");
-    private final NavButton invoice = new NavButton(new FlatSVGIcon("images/navbar/invoice.svg"), "Facturas");
-    private final NavButton notes = new NavButton(new FlatSVGIcon("images/navbar/notes.svg"), "Notas de Entrega");
-    private final NavButton clients = new NavButton(new FlatSVGIcon("images/navbar/clients.svg"), "Clientes");
-    private final NavButton settings = new NavButton(new FlatSVGIcon("images/navbar/settings.svg"), "Configuración");
-    private final NavButton help = new NavButton(new FlatSVGIcon("images/navbar/help.svg"), "Ayuda");
+    private final NavButton menu = new NavButton(new FlatSVGIcon("images/navbar/menu.svg"), "Menú", NavButton.ButtonType.MENU);
+    private final NavButton invoice = new NavButton(new FlatSVGIcon("images/navbar/invoice.svg"), "Facturas", NavButton.ButtonType.INVOICES);
+    private final NavButton notes = new NavButton(new FlatSVGIcon("images/navbar/notes.svg"), "Notas de Entrega", NavButton.ButtonType.NOTES);
+    private final NavButton clients = new NavButton(new FlatSVGIcon("images/navbar/clients.svg"), "Clientes", NavButton.ButtonType.CLIENTS);
+    private final NavButton settings = new NavButton(new FlatSVGIcon("images/navbar/settings.svg"), "Configuración", NavButton.ButtonType.SETTINGS);
+    private final NavButton help = new NavButton(new FlatSVGIcon("images/navbar/help.svg"), "Ayuda", NavButton.ButtonType.HELP);
 }

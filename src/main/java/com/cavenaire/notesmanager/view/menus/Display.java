@@ -29,6 +29,7 @@ class Display<T, B> extends JPanel {
 
         add((Component) top, "push, grow");
         add((Component) bottom, "push, grow");
+        setVisible(false);
     }
 
     // PANELS
