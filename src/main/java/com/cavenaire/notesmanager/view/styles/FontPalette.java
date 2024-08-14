@@ -24,6 +24,10 @@ public class FontPalette {
      */
     public static final Font H1 = new Font("Satoshi Bold", Font.BOLD, 18);
     /**
+     * Satoshi Bold 17pt H2 Style
+     */
+    public static final Font H2 = new Font("Satoshi Bold", Font.BOLD, 17);
+    /**
      * Satoshi Bold 15pt H3 Style
      */
     public static final Font H3 = new Font("Satoshi Bold", Font.BOLD, 15);
@@ -31,4 +35,8 @@ public class FontPalette {
      * Satoshi Regular 17pt H2 Style
      */
     public static final Font H2_REG = new Font("Satoshi Regular", Font.PLAIN, 17);
+    /**
+     * Satoshi Regular 16pt H3 Style
+     */
+    public static final Font H3_REG = new Font("Satoshi Regular", Font.PLAIN, 16);
 }
