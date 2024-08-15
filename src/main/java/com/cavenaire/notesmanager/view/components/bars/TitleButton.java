@@ -1,9 +1,10 @@
-package com.cavenaire.notesmanager.view.components;
+package com.cavenaire.notesmanager.view.components.bars;
 
-import com.cavenaire.notesmanager.view.handlers.TitleButtonHandler;
 import com.cavenaire.notesmanager.view.styles.Palette;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -15,20 +16,18 @@ import java.util.Objects;
  */
 public class TitleButton extends JButton {
 
-    public TitleButton(FlatSVGIcon icon, ButtonType type) {
+    public TitleButton(FlatSVGIcon icon) {
         super();
 
         icon.setColorFilter(new FlatSVGIcon.ColorFilter().add(Color.BLACK, Palette.MAIN));
         this.icon = icon;
-        this.type = type;
 
         setIcon(icon);
         init();
-        TitleButtonHandler.initHandler(this);
     }
 
-    public TitleButton(FlatSVGIcon maxIcon, ButtonType type, FlatSVGIcon resizeIcon) {
-        this(maxIcon, type);
+    public TitleButton(FlatSVGIcon maxIcon, FlatSVGIcon resizeIcon) {
+        this(maxIcon);
 
         resizeIcon.setColorFilter(icon.getColorFilter());
         this.resizeIcon = resizeIcon;
@@ -58,32 +57,10 @@ public class TitleButton extends JButton {
         }
     }
 
-    /**
-     * Get ButtonType enum case.
-     */
-    public ButtonType getType() {
-        return type;
-    }
-
-    /**
-     * Get Maximize button icon state. (maximize == 0 and resize == 1)
-     */
-    public byte getState() {
-        return state;
-    }
-
-    /**
-     * Set Maximize button icon state. (maximize == 0 and resize == 1)
-     */
-    public void setState(byte state) {
-        this.state = state;
-    }
-
     // VARIABLES
-    private final ButtonType type;
+    @Getter
+    @Setter
     private byte state;
-
-    public enum ButtonType {CLOSE, MAXIMIZE, MINIMIZE}
 
     // ICONS
     private final FlatSVGIcon icon;

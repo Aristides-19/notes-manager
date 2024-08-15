@@ -15,7 +15,7 @@ import java.awt.*;
  * @param <B> Bottom Subpanel
  * @see com.cavenaire.notesmanager.view.menus.MainDisplay
  */
-class Display<T, B> extends JPanel {
+public class Display<T, B> extends JPanel {
 
     public Display(T top, B bottom) {
         super();

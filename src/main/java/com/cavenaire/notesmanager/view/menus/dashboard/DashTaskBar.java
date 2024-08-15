@@ -2,25 +2,28 @@ package com.cavenaire.notesmanager.view.menus.dashboard;
 
 import com.cavenaire.notesmanager.model.ClientModel;
 import com.cavenaire.notesmanager.view.styles.Palette;
-import com.cavenaire.notesmanager.view.components.DashboardInfo;
-import com.cavenaire.notesmanager.view.components.MenuButton;
-import com.cavenaire.notesmanager.view.components.TitleLabel;
+import com.cavenaire.notesmanager.view.components.menus.dashboard.DashboardInfo;
+import com.cavenaire.notesmanager.view.components.menus.MenuButton;
+import com.cavenaire.notesmanager.view.components.menus.TitleLabel;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import net.miginfocom.swing.MigLayout;
+import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 
 /**
  * This Panel shows information about the latest client and action button
  *
- * @see com.cavenaire.notesmanager.view.components.DashboardInfo
- * @see com.cavenaire.notesmanager.view.components.MenuButton
+ * @see DashboardInfo
+ * @see MenuButton
  */
-public class TaskBar extends JPanel {
+@Component
+public class DashTaskBar extends JPanel {
 
-    public TaskBar() {
+    public DashTaskBar(MenuButton addNote) {
         super();
+        this.addNote = addNote;
         init();
     }
 
@@ -36,8 +39,8 @@ public class TaskBar extends JPanel {
 
     // COMPONENTS
     private final TitleLabel title = new TitleLabel("¡Bienvenido!");
-    private final MenuButton addNote = new MenuButton(new FlatSVGIcon("images/menus/add.svg"), "Nueva Nota", 12);
-    // THIS IS ONLY FOR TEST CASE
+    private final MenuButton addNote;
+    // THIS IS ONLY FOR TESTS
     private final DashboardInfo dashboardInfo = new DashboardInfo(new FlatSVGIcon("images/menus/dashboard/activity.svg"),
             new ClientModel() {
                 @Override

@@ -1,6 +1,5 @@
-package com.cavenaire.notesmanager.view.components;
+package com.cavenaire.notesmanager.view.components.bars;
 
-import com.cavenaire.notesmanager.view.handlers.NavButtonHandler;
 import com.cavenaire.notesmanager.view.styles.FontPalette;
 import com.cavenaire.notesmanager.view.styles.Palette;
 
@@ -15,12 +14,10 @@ import java.awt.*;
  */
 public class NavButton extends JButton {
 
-    public NavButton(FlatSVGIcon icon, String text, ButtonType type) {
+    public NavButton(FlatSVGIcon icon, String text) {
         super(text);
         this.icon = icon;
-        this.type = type;
         init();
-        NavButtonHandler.initHandler(this);
     }
 
     public void init() {
@@ -56,20 +53,10 @@ public class NavButton extends JButton {
         setIcon(icon);
     }
 
-    /**
-     * Get ButtonType enum case.
-     */
-    public ButtonType getType() {
-        return type;
-    }
-
     // VARIABLES
-    private final ButtonType type;
     private boolean isSelected;
     private final FlatSVGIcon icon;
     private final FlatSVGIcon.ColorFilter colorFilter = new FlatSVGIcon.ColorFilter();
-
-    public enum ButtonType {MENU, INVOICES, NOTES, CLIENTS, SETTINGS, HELP}
 
     // COMMONS
     private static final Cursor CURSOR = new Cursor(Cursor.HAND_CURSOR);

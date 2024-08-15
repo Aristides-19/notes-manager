@@ -1,23 +1,33 @@
 package com.cavenaire.notesmanager.view.bars;
 
-import com.cavenaire.notesmanager.view.components.NavButton;
+import com.cavenaire.notesmanager.view.components.bars.NavButton;
+import com.cavenaire.notesmanager.view.bars.config.NavBarConfig;
 import com.cavenaire.notesmanager.view.styles.Palette;
-import com.cavenaire.notesmanager.view.utils.SVGIcon;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import net.miginfocom.swing.MigLayout;
+import org.springframework.stereotype.Component;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * Side Navigation Bar, it will be there in any showed frame, never disappears.
  *
- * @see com.cavenaire.notesmanager.view.components.NavButton
+ * @see NavButton
+ * @see NavBarConfig
  */
+@Component
 public class NavBar extends JPanel {
 
-    public NavBar() {
+    public NavBar(NavButton menuButton, NavButton invoicesButton, NavButton notesButton, NavButton clientsButton,
+                  NavButton settingsButton, NavButton helpButton) {
         super();
+        this.menu = menuButton;
+        this.invoices = invoicesButton;
+        this.notes = notesButton;
+        this.clients = clientsButton;
+        this.settings = settingsButton;
+        this.help = helpButton;
         init();
     }
 
@@ -29,7 +39,7 @@ public class NavBar extends JPanel {
 
         add(logo, "center, gap top 75px");
         add(menu, "center, gap top 75px, grow, pushx");
-        add(invoice, "center, grow");
+        add(invoices, "center, grow");
         add(notes, "center, grow");
         add(clients, "center, grow");
 
@@ -40,11 +50,11 @@ public class NavBar extends JPanel {
     }
 
     // COMPONENTS
-    private final SVGIcon logo = new SVGIcon("images/logo.svg", 219, 37);
-    private final NavButton menu = new NavButton(new FlatSVGIcon("images/navbar/menu.svg"), "Menú", NavButton.ButtonType.MENU);
-    private final NavButton invoice = new NavButton(new FlatSVGIcon("images/navbar/invoice.svg"), "Facturas", NavButton.ButtonType.INVOICES);
-    private final NavButton notes = new NavButton(new FlatSVGIcon("images/navbar/notes.svg"), "Notas de Entrega", NavButton.ButtonType.NOTES);
-    private final NavButton clients = new NavButton(new FlatSVGIcon("images/navbar/clients.svg"), "Clientes", NavButton.ButtonType.CLIENTS);
-    private final NavButton settings = new NavButton(new FlatSVGIcon("images/navbar/settings.svg"), "Configuración", NavButton.ButtonType.SETTINGS);
-    private final NavButton help = new NavButton(new FlatSVGIcon("images/navbar/help.svg"), "Ayuda", NavButton.ButtonType.HELP);
+    private final JLabel logo = new JLabel(new FlatSVGIcon("images/logo.svg", 219, 37));
+    private final NavButton menu;
+    private final NavButton invoices;
+    private final NavButton notes;
+    private final NavButton clients;
+    private final NavButton settings;
+    private final NavButton help;
 }

@@ -1,23 +1,28 @@
 package com.cavenaire.notesmanager.view.ui;
 
-import net.miginfocom.swing.MigLayout;
-
 import com.cavenaire.notesmanager.view.bars.*;
 import com.cavenaire.notesmanager.view.menus.MainDisplay;
 import com.cavenaire.notesmanager.view.styles.Palette;
 
+import net.miginfocom.swing.MigLayout;
+import org.springframework.stereotype.Component;
+
 import javax.swing.*;
 
 /**
- * Main UI Container, it instantiates Navigation Bar, Title Bar, and Menus.
+ * Main UI Container, it contains Navigation Bar, Title Bar, and Menus.
  *
  * @see com.cavenaire.notesmanager.view.bars
  * @see com.cavenaire.notesmanager.view.menus
  */
-class MainPanel extends JPanel {
+@Component
+public class MainPanel extends JPanel {
 
-    MainPanel() {
+    public MainPanel(NavBar navBar, TitleBar titleBar, MainDisplay display) {
         super();
+        this.navBar = navBar;
+        this.titleBar = titleBar;
+        this.displayScrollPane = new JScrollPane(display);
         init();
     }
 
@@ -35,8 +40,7 @@ class MainPanel extends JPanel {
     }
 
     // COMPONENTS
-    private final NavBar navBar = new NavBar();
-    private final TitleBar titleBar = new TitleBar();
-    private final MainDisplay display = new MainDisplay();
-    private final JScrollPane displayScrollPane = new JScrollPane(display);
+    private final NavBar navBar;
+    private final TitleBar titleBar;
+    private final JScrollPane displayScrollPane;
 }

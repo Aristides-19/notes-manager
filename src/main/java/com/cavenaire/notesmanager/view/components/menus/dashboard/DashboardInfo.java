@@ -1,4 +1,4 @@
-package com.cavenaire.notesmanager.view.components;
+package com.cavenaire.notesmanager.view.components.menus.dashboard;
 
 import com.cavenaire.notesmanager.model.ClientModel;
 import com.cavenaire.notesmanager.view.styles.FontPalette;
@@ -59,7 +59,7 @@ public class DashboardInfo extends JPanel {
     }
 
     private String getMultiText(String title, String info) {
-        // HTML is only used here because is the simplest way to get two fonts in the same JLabel
+        // HTML is only used here because it is the simplest way to get two fonts on the same JLabel
         return "<html><span style='font-family: " + FontPalette.FAMILY + "; font-weight: bold; font-size: 17pt;'>" +
                 title + "</span><br><span style='font-family: " + FontPalette.FAMILY + "; font-size: 17pt;'>" +
                 info + "</span></html>";

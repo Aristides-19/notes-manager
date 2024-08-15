@@ -1,10 +1,11 @@
 package com.cavenaire.notesmanager.view.menus.dashboard;
 
-import com.cavenaire.notesmanager.view.components.DashboardCounter;
+import com.cavenaire.notesmanager.view.components.menus.dashboard.DashboardCounter;
 import com.cavenaire.notesmanager.view.styles.Palette;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import net.miginfocom.swing.MigLayout;
+import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 
@@ -13,6 +14,7 @@ import javax.swing.*;
  *
  * @see DashboardCounter
  */
+@Component
 public class Counters extends JPanel {
 
     public Counters() {

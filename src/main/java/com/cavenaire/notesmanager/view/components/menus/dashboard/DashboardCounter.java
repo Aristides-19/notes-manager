@@ -1,4 +1,4 @@
-package com.cavenaire.notesmanager.view.components;
+package com.cavenaire.notesmanager.view.components.menus.dashboard;
 
 import com.cavenaire.notesmanager.view.styles.FontPalette;
 import com.cavenaire.notesmanager.view.styles.Palette;
