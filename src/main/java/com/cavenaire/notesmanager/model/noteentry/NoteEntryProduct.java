@@ -1,27 +1,24 @@
-package com.cavenaire.notesmanager.model;
+package com.cavenaire.notesmanager.model.noteentry;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 /**
- * Represents an Invoice Record Product POJO Entity.
+ * Represents a Note Entry Product POJO Entity.
  */
 @Getter
 @Setter
 @Builder
 @ToString
-public class InvoiceRecordProduct {
+public class NoteEntryProduct {
 
     /**
      * Product's Primary Key ID.
      */
     private Long productId;
     /**
-     * Invoice Record's Foreign Key ID that owns the product.
+     * Note Entry's Foreign Key ID that owns the product.
      */
-    private Long invoiceId;
+    private Long noteId;
     /**
      * Product's quantity int number.
      */
@@ -33,6 +30,10 @@ public class InvoiceRecordProduct {
     /**
      * Product's Price in Bolivars – Bs. N
      */
-    private double price;
+    private double priceBs;
+    /**
+     * Product's Price in USD Dollars – N $
+     */
+    private double priceUsd;
 
 }

@@ -7,7 +7,7 @@
     <groupId>com.cavenaire</groupId>
     <artifactId>notes-manager</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Cavenaire Notes Manager</name>
+    <name>Cavenaire Manager</name>
     <description>Management System for Cavenaire</description>
 
     <developers>

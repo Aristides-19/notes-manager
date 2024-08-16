@@ -1,4 +1,4 @@
-package com.cavenaire.notesmanager.model;
+package com.cavenaire.notesmanager.model.invoicerecord;
 
 import lombok.*;
 
