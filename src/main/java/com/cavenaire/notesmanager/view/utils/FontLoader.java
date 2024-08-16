@@ -1,20 +1,19 @@
 package com.cavenaire.notesmanager.view.utils;
 
+import org.slf4j.LoggerFactory;
+
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
-import java.util.logging.Logger;
-import java.util.logging.Level;
 
 /**
  * FontLoader static class to load Satoshi variants font.
  */
 public class FontLoader {
-    private static final Logger logger = Logger.getLogger(FontLoader.class.getName());
 
     /**
-     * It loads every font needed in the project. It output a {@code SEVERE} log if a font didn't load.
+     * It loads every font needed in the project. It output a {@code ERROR} log if a font didn't load.
      */
     static public void loadFonts() {
 
@@ -31,7 +30,7 @@ public class FontLoader {
             GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(regular);
 
         } catch (IOException | FontFormatException e) {
-            logger.log(Level.SEVERE, "Font can't be loaded", e);
+            LoggerFactory.getLogger(FontLoader.class).error("Font cannot be loaded", e);
         }
 
     }
