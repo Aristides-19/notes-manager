@@ -4,6 +4,7 @@ import com.cavenaire.notesmanager.model.Customer;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessResourceFailureException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -12,8 +13,10 @@ import lombok.NonNull;
 
 import java.sql.PreparedStatement;
 import java.util.List;
-import java.util.Optional;
 
+/**
+ * Repository layer for {@code customers}.
+ */
 @Repository
 @RequiredArgsConstructor
 public class CustomerRepositoryImpl implements CustomerRepository {
@@ -21,19 +24,19 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     private final JdbcTemplate jdbcTemplate;
     private final CustomerMapperImpl customerMapper = new CustomerMapperImpl();
 
-    public Customer save(@NonNull Customer entity) {
+    public Customer save(@NonNull Customer customer) {
         String sql = "INSERT INTO customers(full_name, document, contact, second_contact, address, last_timestamp)" +
                 "VALUES (?, ?, ?, ?, ?, ?);";
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(sql, new String[]{"customer_id"});
-            ps.setString(1, entity.getFullName());
-            ps.setString(2, entity.getDocument());
-            ps.setString(3, entity.getContact());
-            ps.setString(4, entity.getSecondContact());
-            ps.setString(5, entity.getAddress());
-            ps.setString(6, entity.getLastTimestamp().toString());
+            ps.setString(1, customer.getFullName());
+            ps.setString(2, customer.getDocument());
+            ps.setString(3, customer.getContact());
+            ps.setString(4, customer.getSecondContact());
+            ps.setString(5, customer.getAddress());
+            ps.setString(6, customer.getLastTimestamp().toString());
             return ps;
         }, keyHolder);
 
@@ -41,12 +44,12 @@ public class CustomerRepositoryImpl implements CustomerRepository {
             throw new DataAccessResourceFailureException("Cannot get generated key");
         }
 
-        entity.setCustomerId(keyHolder.getKey().longValue());
-        return entity;
+        customer.setCustomerId(keyHolder.getKey().longValue());
+        return customer;
     }
 
-    public void delete(@NonNull Customer entity) {
-        deleteById(entity.getCustomerId());
+    public void delete(@NonNull Customer customer) {
+        deleteById(customer.getCustomerId());
     }
 
     public void deleteById(Long id) {
@@ -54,18 +57,17 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         jdbcTemplate.update(sql, id);
     }
 
-    public void update(@NonNull Customer entity) {
+    public void update(@NonNull Customer customer) {
         String sql = "UPDATE customers " +
                 "SET full_name = ?, document = ?, contact = ?, second_contact = ?, address = ?, last_timestamp = ?" +
                 "WHERE customer_id = ?";
-        jdbcTemplate.update(sql, entity.getFullName(), entity.getDocument(), entity.getContact(), entity.getSecondContact(),
-                entity.getAddress(), entity.getLastTimestamp(), entity.getCustomerId());
+        jdbcTemplate.update(sql, customer.getFullName(), customer.getDocument(), customer.getContact(), customer.getSecondContact(),
+                customer.getAddress(), customer.getLastTimestamp(), customer.getCustomerId());
     }
 
-    public Optional<Customer> getById(Long id) {
+    public Customer getById(Long id) throws EmptyResultDataAccessException {
         String sql = "SELECT * FROM customers WHERE customer_id = ?";
-        Customer customer = jdbcTemplate.queryForObject(sql, customerMapper, id);
-        return Optional.ofNullable(customer);
+        return jdbcTemplate.queryForObject(sql, customerMapper, id);
     }
 
     public Customer getLastTimestamp() {
