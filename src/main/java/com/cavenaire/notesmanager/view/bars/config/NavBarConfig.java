@@ -47,8 +47,8 @@ public class NavBarConfig {
     }
 
     @Bean
-    public NavButton clientsButton() {
-        var b = new NavButton(new FlatSVGIcon("images/navbar/clients.svg"), "Clientes");
+    public NavButton customersButton() {
+        var b = new NavButton(new FlatSVGIcon("images/navbar/customers.svg"), "Clientes");
         setEvent(b, "clients");
         return b;
     }

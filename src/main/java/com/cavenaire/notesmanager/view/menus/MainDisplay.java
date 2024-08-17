@@ -13,12 +13,12 @@ import javax.swing.*;
 @Component
 public class MainDisplay extends JPanel {
 
-    public MainDisplay(Display dashboard, Display invoices, Display notes, Display clients, Display settings, Display help) {
+    public MainDisplay(Display dashboard, Display invoices, Display notes, Display customers, Display settings, Display help) {
         super();
         this.dashboard = dashboard;
         this.invoices = invoices;
         this.notes = notes;
-        this.clients = clients;
+        this.customers = customers;
         this.settings = settings;
         this.help = help;
         this.selected = dashboard;
@@ -33,7 +33,7 @@ public class MainDisplay extends JPanel {
         add(dashboard, constraints);
         add(invoices, constraints);
         add(notes, constraints);
-        add(clients, constraints);
+        add(customers, constraints);
         add(settings, constraints);
         add(help, constraints);
 
@@ -52,8 +52,8 @@ public class MainDisplay extends JPanel {
         change(notes);
     }
 
-    public void onClients() {
-        change(clients);
+    public void onCustomers() {
+        change(customers);
     }
 
     public void onSettings() {
@@ -76,7 +76,7 @@ public class MainDisplay extends JPanel {
     private final Display dashboard;
     private final Display invoices;
     private final Display notes;
-    private final Display clients;
+    private final Display customers;
     private final Display settings;
     private final Display help;
 

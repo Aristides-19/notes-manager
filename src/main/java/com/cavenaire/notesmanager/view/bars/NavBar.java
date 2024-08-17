@@ -19,13 +19,13 @@ import javax.swing.*;
 @Component
 public class NavBar extends JPanel {
 
-    public NavBar(NavButton menuButton, NavButton invoicesButton, NavButton notesButton, NavButton clientsButton,
+    public NavBar(NavButton menuButton, NavButton invoicesButton, NavButton notesButton, NavButton customersButton,
                   NavButton settingsButton, NavButton helpButton) {
         super();
         this.menu = menuButton;
         this.invoices = invoicesButton;
         this.notes = notesButton;
-        this.clients = clientsButton;
+        this.customers = customersButton;
         this.settings = settingsButton;
         this.help = helpButton;
         init();
@@ -41,7 +41,7 @@ public class NavBar extends JPanel {
         add(menu, "center, gap top 75px, grow, pushx");
         add(invoices, "center, grow");
         add(notes, "center, grow");
-        add(clients, "center, grow");
+        add(customers, "center, grow");
 
         add(settings, "center, growx, push, bottom");
         add(help, "center, grow");
@@ -54,7 +54,7 @@ public class NavBar extends JPanel {
     private final NavButton menu;
     private final NavButton invoices;
     private final NavButton notes;
-    private final NavButton clients;
+    private final NavButton customers;
     private final NavButton settings;
     private final NavButton help;
 }

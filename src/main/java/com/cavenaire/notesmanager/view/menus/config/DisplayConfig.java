@@ -33,7 +33,7 @@ public class DisplayConfig {
     }
 
     @Bean
-    public Display clients() {
+    public Display customers() {
         return new Display<>(new JLabel("Clientes"), new JLabel());
     }
 

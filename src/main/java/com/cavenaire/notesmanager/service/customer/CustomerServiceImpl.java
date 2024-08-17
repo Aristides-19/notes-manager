@@ -13,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Service Layer for {@code customers}.
+ */
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -20,16 +23,16 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepositoryImpl customerRepository;
 
-    public Customer save(@NonNull Customer entity) throws ServiceLayerException {
+    public Customer save(@NonNull Customer customer) throws ServiceLayerException {
         try {
-            return customerRepository.save(entity);
+            return customerRepository.save(customer);
         } catch (DataAccessException e) {
             throw new ServiceLayerException("Failed to save customer, should try again", e);
         }
     }
 
-    public void delete(@NonNull Customer entity) throws ServiceLayerException {
-        deleteById(entity.getCustomerId());
+    public void delete(@NonNull Customer customer) throws ServiceLayerException {
+        deleteById(customer.getCustomerId());
     }
 
     public void deleteById(Long id) throws ServiceLayerException {
@@ -40,9 +43,9 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
-    public void update(@NonNull Customer entity) throws ServiceLayerException {
+    public void update(@NonNull Customer customer) throws ServiceLayerException {
         try {
-            customerRepository.update(entity);
+            customerRepository.update(customer);
         } catch (DataAccessException e) {
             throw new ServiceLayerException("Failed to update customer, should try again", e);
         }
