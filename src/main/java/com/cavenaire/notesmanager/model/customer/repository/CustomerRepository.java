@@ -1,6 +1,7 @@
-package com.cavenaire.notesmanager.repository.customer;
+package com.cavenaire.notesmanager.model.customer.repository;
 
-import com.cavenaire.notesmanager.model.Customer;
+import com.cavenaire.notesmanager.model.EntityRepository;
+import com.cavenaire.notesmanager.model.customer.Customer;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessResourceFailureException;
@@ -12,18 +13,22 @@ import org.springframework.stereotype.Repository;
 import lombok.NonNull;
 
 import java.sql.PreparedStatement;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Repository layer for {@code customers}.
  */
 @Repository
 @RequiredArgsConstructor
-public class CustomerRepositoryImpl implements CustomerRepository {
+public class CustomerRepository implements EntityRepository<Customer> {
 
     private final JdbcTemplate jdbcTemplate;
-    private final CustomerMapperImpl customerMapper = new CustomerMapperImpl();
+    private final CustomerMapper customerMapper = new CustomerMapper();
 
+    @Override
     public Customer save(@NonNull Customer customer) {
         String sql = "INSERT INTO customers(full_name, document, contact, second_contact, address, last_timestamp)" +
                 "VALUES (?, ?, ?, ?, ?, ?);";
@@ -48,15 +53,13 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return customer;
     }
 
+    @Override
     public void delete(@NonNull Customer customer) {
-        deleteById(customer.getCustomerId());
-    }
-
-    public void deleteById(Long id) {
         String sql = "DELETE FROM customers WHERE customer_id = ?";
-        jdbcTemplate.update(sql, id);
+        jdbcTemplate.update(sql, customer.getCustomerId());
     }
 
+    @Override
     public void update(@NonNull Customer customer) {
         String sql = "UPDATE customers " +
                 "SET full_name = ?, document = ?, contact = ?, second_contact = ?, address = ?, last_timestamp = ?" +
@@ -65,20 +68,48 @@ public class CustomerRepositoryImpl implements CustomerRepository {
                 customer.getAddress(), customer.getLastTimestamp(), customer.getCustomerId());
     }
 
-    public Customer getById(Long id) throws EmptyResultDataAccessException {
-        String sql = "SELECT * FROM customers WHERE customer_id = ?";
-        return jdbcTemplate.queryForObject(sql, customerMapper, id);
-    }
-
-    public Customer getLastTimestamp() {
-        String sql = "SELECT * FROM customers ORDER BY datetime(last_timestamp) DESC LIMIT 1";
-        return jdbcTemplate.queryForObject(sql, customerMapper);
-    }
-
     public int getCount() {
         String sql = "SELECT count(*) FROM customers";
         Integer count = jdbcTemplate.queryForObject(sql, Integer.class);
         return count != null ? count : 0;
+    }
+
+    public Map<String, Integer> getCountByType() {
+        String sql = "SELECT " +
+                "CASE " +
+                "    WHEN document LIKE 'J%' THEN 'juridical' " +
+                "    ELSE 'natural' " +
+                "END as type, " +
+                "count(*) AS count " +
+                "FROM customers " +
+                "GROUP BY type";
+        var results = jdbcTemplate.queryForList(sql);
+        Map<String, Integer> countByType = new HashMap<>();
+        for (var row : results) {
+            countByType.put((String) row.get("type"), (Integer) row.get("count"));
+        }
+        return countByType;
+    }
+
+    public Customer getByLastTimestamp() throws EmptyResultDataAccessException {
+        String sql = "SELECT * FROM customers ORDER BY datetime(last_timestamp) DESC LIMIT 1";
+        try {
+            return jdbcTemplate.queryForObject(sql, customerMapper);
+        } catch (EmptyResultDataAccessException e) {
+            return Customer.builder().build();
+        }
+    }
+
+    public List<Customer> findAllByIds(List<Integer> ids) {
+        String placeholders = String.join(",", Collections.nCopies(ids.size(), "?"));
+        String sql = "SELECT * FROM customers WHERE customer_id IN (" + placeholders + ")";
+        return jdbcTemplate.query(con -> {
+            PreparedStatement ps = con.prepareStatement(sql);
+            for (int i = 0; i < ids.size(); i++) {
+                ps.setObject(i + 1, ids.get(i));
+            }
+            return ps;
+        }, customerMapper);
     }
 
     public List<Customer> findAllByName(String query) {
@@ -90,15 +121,14 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     public List<Customer> findAllByDoc(String query) {
-        String queryType = query.length() < 3 ? "LIKE ?)" : "MATCH ?)";
         String escapedQuery = String.format("\"%s\"", query);
         String sql = "SELECT * FROM customers WHERE customer_id IN " +
-                "(SELECT rowid FROM trigram_customers WHERE document " + queryType;
+                "(SELECT rowid FROM trigram_customers WHERE document MATCH ?)";
         return jdbcTemplate.query(sql, customerMapper, escapedQuery);
     }
 
-    public List<Customer> findAll() {
-        String sql = "SELECT * FROM customers";
-        return jdbcTemplate.query(sql, customerMapper);
+    public List<Customer> findAll(int limit) {
+        String sql = "SELECT * FROM customers ORDER BY datetime(last_timestamp) DESC LIMIT ?";
+        return jdbcTemplate.query(sql, customerMapper, limit);
     }
 }

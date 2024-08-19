@@ -1,6 +1,6 @@
-package com.cavenaire.notesmanager.repository.customer;
+package com.cavenaire.notesmanager.model.customer.repository;
 
-import com.cavenaire.notesmanager.model.Customer;
+import com.cavenaire.notesmanager.model.customer.Customer;
 
 import org.springframework.jdbc.core.RowMapper;
 
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class CustomerMapperImpl implements RowMapper<Customer> {
+public class CustomerMapper implements RowMapper<Customer> {
     @Override
     public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
         return Customer.builder()

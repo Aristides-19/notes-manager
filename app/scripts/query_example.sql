@@ -16,3 +16,19 @@ WHERE customer_id IN
     (SELECT ROWID
         FROM trigram_customers
         WHERE full_name MATCH 'ris');
+
+-- Customer per Type
+SELECT
+    CASE
+        WHEN document LIKE 'J%' THEN 'juridical'
+        ELSE 'natural'
+    END as type,
+    count(*) AS count
+FROM customers
+GROUP BY type;
+
+-- Invoice/Note order by Date
+SELECT *
+FROM invoice_records
+WHERE strftime('%d-%m-%Y', created_on, 'localtime') LIKE '18%'
+ORDER BY date(created_on, 'localtime') DESC LIMIT 1;

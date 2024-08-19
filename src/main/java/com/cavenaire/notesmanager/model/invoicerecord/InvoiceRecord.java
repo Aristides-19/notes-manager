@@ -1,8 +1,11 @@
 package com.cavenaire.notesmanager.model.invoicerecord;
 
+import com.cavenaire.notesmanager.model.customer.Customer;
+import com.cavenaire.notesmanager.model.invoiceproduct.InvoiceRecordProduct;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Represents an Invoice Record POJO Entity.
@@ -37,5 +40,13 @@ public class InvoiceRecord {
      * Invoice Record's status. Zero(0) is DRAFT and One(1) is FINISHED.
      */
     private byte status;
+    /**
+     * Invoice Record's products.
+     */
+    private List<InvoiceRecordProduct> products;
+    /**
+     * Invoice Record's owner customer.
+     */
+    private Customer customer;
 
 }

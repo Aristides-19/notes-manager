@@ -1,8 +1,11 @@
-package com.cavenaire.notesmanager.model;
+package com.cavenaire.notesmanager.model.customer;
 
+import com.cavenaire.notesmanager.model.invoicerecord.InvoiceRecord;
+import com.cavenaire.notesmanager.model.noteentry.NoteEntry;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Represents a Customer POJO Entity.
@@ -41,14 +44,13 @@ public class Customer {
      * Customer's last update timestamp. It is updated when an invoice or note entry creation.
      */
     private LocalDateTime lastTimestamp;
-
     /**
-     * If customer is a Natural type.
-     *
-     * @return false if costumer is a Juridical type.
+     * Customer's invoice records.
      */
-    public boolean isNatural() {
-        return document.startsWith("V") || document.startsWith("E");
-    }
+    private List<InvoiceRecord> invoiceRecords;
+    /**
+     * Customer's note entries.
+     */
+    private List<NoteEntry> noteEntries;
 
 }
