@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * Service layer for {@code invoice record products}
+ * Service layer for {@code invoice record products}.
  */
 @Service
 @RequiredArgsConstructor

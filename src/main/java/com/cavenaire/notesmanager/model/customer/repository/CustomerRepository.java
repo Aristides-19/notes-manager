@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import lombok.NonNull;
 
 import java.sql.PreparedStatement;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,6 +84,8 @@ public class CustomerRepository implements EntityRepository<Customer> {
                 "GROUP BY type";
         var results = jdbcTemplate.queryForList(sql);
         Map<String, Integer> countByType = new HashMap<>();
+        countByType.put("natural", 0);
+        countByType.put("juridical", 0);
         for (var row : results) {
             countByType.put((String) row.get("type"), (Integer) row.get("count"));
         }
@@ -100,16 +101,9 @@ public class CustomerRepository implements EntityRepository<Customer> {
         }
     }
 
-    public List<Customer> findAllByIds(List<Integer> ids) {
-        String placeholders = String.join(",", Collections.nCopies(ids.size(), "?"));
-        String sql = "SELECT * FROM customers WHERE customer_id IN (" + placeholders + ")";
-        return jdbcTemplate.query(con -> {
-            PreparedStatement ps = con.prepareStatement(sql);
-            for (int i = 0; i < ids.size(); i++) {
-                ps.setObject(i + 1, ids.get(i));
-            }
-            return ps;
-        }, customerMapper);
+    public Customer getById(Long id) {
+        String sql = "SELECT * FROM customers WHERE customer_id = ?";
+        return jdbcTemplate.queryForObject(sql, customerMapper);
     }
 
     public List<Customer> findAllByName(String query) {

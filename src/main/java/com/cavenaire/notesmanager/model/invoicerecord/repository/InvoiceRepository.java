@@ -70,7 +70,7 @@ public class InvoiceRepository implements EntityRepository<InvoiceRecord> {
         return count != null ? count : 0;
     }
 
-    public List<InvoiceRecord> findAllByIds(List<Integer> ids) {
+    public List<InvoiceRecord> findAllByIds(List<Long> ids) {
         String placeholders = String.join(",", Collections.nCopies(ids.size(), "?"));
         String sql = "SELECT * FROM invoice_records WHERE invoice_id IN (" + placeholders + ")";
         return jdbcTemplate.query(con -> {
@@ -82,16 +82,9 @@ public class InvoiceRepository implements EntityRepository<InvoiceRecord> {
         }, invoiceMapper);
     }
 
-    public List<InvoiceRecord> findAllByCustomerIds(List<Integer> ids) {
-        String placeholders = String.join(",", Collections.nCopies(ids.size(), "?"));
-        String sql = "SELECT * FROM invoice_records WHERE customer_id IN (" + placeholders + ")";
-        return jdbcTemplate.query(con -> {
-            PreparedStatement ps = con.prepareStatement(sql);
-            for (int i = 0; i < ids.size(); i++) {
-                ps.setObject(i + 1, ids.get(i));
-            }
-            return ps;
-        }, invoiceMapper);
+    public List<InvoiceRecord> findAllByCustomerId(Long id) {
+        String sql = "SELECT * FROM invoice_records WHERE customer_id = ?";
+        return jdbcTemplate.query(sql, invoiceMapper);
     }
 
     public List<InvoiceRecord> findAllByDate(String query, int limit) {

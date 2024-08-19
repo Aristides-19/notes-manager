@@ -4,10 +4,14 @@ import com.cavenaire.notesmanager.model.EntityService;
 import com.cavenaire.notesmanager.model.customer.Customer;
 import com.cavenaire.notesmanager.model.customer.repository.CustomerRepository;
 import com.cavenaire.notesmanager.model.ServiceLayerException;
+import com.cavenaire.notesmanager.model.invoicerecord.service.InvoiceService;
 
 import static com.cavenaire.notesmanager.model.ServiceLayerException.*;
 
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +27,8 @@ import java.util.Map;
 public class CustomerService implements EntityService<Customer> {
 
     private final CustomerRepository customerRepository;
+    @Setter(onMethod_ = @Autowired, onParam_ = @Lazy)
+    private InvoiceService invoiceService;
 
     @Override
     public Customer save(Customer customer) throws ServiceLayerException {
@@ -55,22 +61,30 @@ public class CustomerService implements EntityService<Customer> {
     }
 
     @Transactional(readOnly = true)
-    public List<Customer> findAllByIds(List<Integer> ids) throws ServiceLayerException {
-        return exceptionHandler(() -> customerRepository.findAllByIds(ids));
+    public Customer getById(Long id) throws ServiceLayerException {
+        return exceptionHandler(() -> customerRepository.getById(id));
     }
 
     @Transactional(readOnly = true)
     public List<Customer> findAllByName(String query) throws ServiceLayerException {
-        return exceptionHandler(() -> customerRepository.findAllByName(query));
+        return exceptionHandler(() -> findCustomersInvoices(customerRepository.findAllByName(query)));
     }
 
     @Transactional(readOnly = true)
     public List<Customer> findAllByDoc(String query) throws ServiceLayerException {
-        return exceptionHandler(() -> customerRepository.findAllByDoc(query));
+        return exceptionHandler(() -> findCustomersInvoices(customerRepository.findAllByDoc(query)));
     }
 
     @Transactional(readOnly = true)
     public List<Customer> findAll(int limit) throws ServiceLayerException {
-        return exceptionHandler(() -> customerRepository.findAll(limit));
+        return exceptionHandler(() -> findCustomersInvoices(customerRepository.findAll(limit)));
+    }
+
+    private List<Customer> findCustomersInvoices(List<Customer> customers) {
+        customers.forEach(customer -> {
+            customer.setInvoiceRecords(invoiceService.findAllByCustomerId(customer.getCustomerId()));
+            customer.getInvoiceRecords().forEach(invoice -> invoice.setCustomer(customer));
+        });
+        return customers;
     }
 }
