@@ -1,5 +1,6 @@
 package com.cavenaire.notesmanager.view.handlers;
 
+import com.cavenaire.notesmanager.controller.Controller;
 import com.cavenaire.notesmanager.view.menus.MainDisplay;
 import com.cavenaire.notesmanager.view.components.bars.NavButton;
 
@@ -9,7 +10,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
- * Navigation Bar Buttons Event Handling.
+ * Navigation Bar Buttons Event Handling. It calls {@code controller} to update menu display views.
  *
  * @see NavButton
  * @see com.cavenaire.notesmanager.view.menus.MainDisplay
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Component;
 public class NavBarHandler {
 
     private MainDisplay mainDisplay;
+    private Controller controller;
 
     public void initHandler(NavButton b, String type) {
         if (type.equals("menu")) {
@@ -29,6 +31,7 @@ public class NavBarHandler {
             case "menu":
                 b.addActionListener(e -> {
                     changeSelection(b);
+                    controller.updateDashboard();
                     mainDisplay.onMenu();
                 });
                 break;

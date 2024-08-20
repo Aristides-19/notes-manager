@@ -1,5 +1,6 @@
 package com.cavenaire.notesmanager;
 
+import com.cavenaire.notesmanager.controller.Controller;
 import com.cavenaire.notesmanager.view.ui.MainUI;
 
 import com.formdev.flatlaf.FlatLightLaf;
@@ -22,6 +23,7 @@ public class App {
     public static void main(String[] args) {
         FlatLightLaf.setup();
         EventQueue.invokeAndWait(() -> context = new SpringApplicationBuilder(App.class).headless(false).web(WebApplicationType.NONE).run(args));
+        context.getBean(Controller.class).updateDashboard();
         EventQueue.invokeLater(() -> context.getBean(MainUI.class).setVisible(true));
     }
 }

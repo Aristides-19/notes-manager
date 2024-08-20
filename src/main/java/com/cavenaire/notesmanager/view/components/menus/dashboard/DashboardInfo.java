@@ -1,6 +1,7 @@
 package com.cavenaire.notesmanager.view.components.menus.dashboard;
 
-import com.cavenaire.notesmanager.model.ClientModel;
+import com.cavenaire.notesmanager.model.customer.Customer;
+import com.cavenaire.notesmanager.view.observer.Observable;
 import com.cavenaire.notesmanager.view.styles.FontPalette;
 import com.cavenaire.notesmanager.view.styles.Palette;
 
@@ -13,12 +14,24 @@ import java.awt.*;
 /**
  * Dashboard Information Panel about Last Client
  */
-public class DashboardInfo extends JPanel {
+public class DashboardInfo extends JPanel implements Observable<Customer> {
 
-    public DashboardInfo(FlatSVGIcon icon, ClientModel client) {
+    public DashboardInfo(FlatSVGIcon icon) {
         super();
-        initComponents(icon, client);
+        initComponents(icon);
         init();
+    }
+
+    @Override
+    public void update(Customer customer) {
+        try {
+            name.setText(getMultiText("Nombre", truncateString(customer.getFullName(), 15)));
+            contact.setText(getMultiText("Contacto", customer.getContact()));
+            document.setText(getMultiText("Documento", customer.getDocument()));
+            address.setText(getMultiText("Dirección", truncateString(customer.getAddress(), 35)));
+        } catch (NullPointerException e) {
+            title.setText("¡Agrega tu Primer Cliente!");
+        }
     }
 
     private void init() {
@@ -36,12 +49,8 @@ public class DashboardInfo extends JPanel {
         add(address, "push");
     }
 
-    private void initComponents(FlatSVGIcon icon, ClientModel client) {
+    private void initComponents(FlatSVGIcon icon) {
         title.setText("Último Cliente");
-        name.setText(getMultiText("Nombre", client.getName()));
-        contact.setText(getMultiText("Contacto", client.getContact()));
-        document.setText(getMultiText("Documento", client.getDocument()));
-        address.setText(getMultiText("Dirección", truncateAddress(client.getAddress())));
 
         String style = "foreground : " + Palette.MAIN_HEX;
 
@@ -65,11 +74,11 @@ public class DashboardInfo extends JPanel {
                 info + "</span></html>";
     }
 
-    private String truncateAddress(String text) {
-        if (text.length() <= 35) {
+    private String truncateString(String text, int length) {
+        if (text.length() <= length) {
             return text;
         }
-        return text.substring(0, 35) + "...";
+        return text.substring(0, length) + "...";
     }
 
     // COMPONENTS

@@ -3,7 +3,6 @@ package com.cavenaire.notesmanager.view.menus.dashboard;
 import com.cavenaire.notesmanager.view.components.menus.dashboard.DashboardCounter;
 import com.cavenaire.notesmanager.view.styles.Palette;
 
-import com.formdev.flatlaf.extras.FlatSVGIcon;
 import net.miginfocom.swing.MigLayout;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +16,12 @@ import javax.swing.*;
 @Component
 public class Counters extends JPanel {
 
-    public Counters() {
+    public Counters(DashboardCounter invoicesCounter, DashboardCounter customersCounter, DashboardCounter naturalsCounter, DashboardCounter juridicalsCounter) {
         super();
+        this.invoicesCounter = invoicesCounter;
+        this.customersCounter = customersCounter;
+        this.naturalsCounter = naturalsCounter;
+        this.juridicalsCounter = juridicalsCounter;
         init();
     }
 
@@ -27,15 +30,15 @@ public class Counters extends JPanel {
 
         putClientProperty("FlatLaf.style", "background : " + Palette.BACKGROUND_HEX);
 
-        add(invoice, "push, grow, span 2 2, gapright 10");
-        add(clients, "push, grow, span 2 2, gapright 30");
-        add(natural, "push, grow, wrap, gapbottom 10");
-        add(juridical, "push, grow");
+        add(invoicesCounter, "push, grow, span 2 2, gapright 10");
+        add(customersCounter, "push, grow, span 2 2, gapright 30");
+        add(naturalsCounter, "push, grow, wrap, gapbottom 10");
+        add(juridicalsCounter, "push, grow");
     }
 
     // PANELS
-    private final DashboardCounter invoice = new DashboardCounter(new FlatSVGIcon("images/menus/dashboard/invoice.svg"), "Facturas Registradas", "22");
-    private final DashboardCounter clients = new DashboardCounter(new FlatSVGIcon("images/menus/dashboard/customers.svg"), "Clientes Registrados", "57");
-    private final DashboardCounter natural = new DashboardCounter(new FlatSVGIcon("images/menus/dashboard/natural.svg"), "Jurídicos", "25");
-    private final DashboardCounter juridical = new DashboardCounter(new FlatSVGIcon("images/menus/dashboard/juridical.svg"), "Naturales", "32");
+    private final DashboardCounter invoicesCounter;
+    private final DashboardCounter customersCounter;
+    private final DashboardCounter naturalsCounter;
+    private final DashboardCounter juridicalsCounter;
 }

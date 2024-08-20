@@ -1,5 +1,6 @@
 package com.cavenaire.notesmanager.view.components.menus.dashboard;
 
+import com.cavenaire.notesmanager.view.observer.Observable;
 import com.cavenaire.notesmanager.view.styles.FontPalette;
 import com.cavenaire.notesmanager.view.styles.Palette;
 
@@ -13,12 +14,17 @@ import java.awt.*;
 /**
  * Dashboard Counter Panel, it shows a counter for specified info.
  */
-public class DashboardCounter extends JPanel {
+public class DashboardCounter extends JPanel implements Observable<Integer> {
 
-    public DashboardCounter(FlatSVGIcon icon, String text, String initialCount) {
+    public DashboardCounter(FlatSVGIcon icon, String text) {
         super();
-        initComponents(icon, text, initialCount);
+        initComponents(icon, text);
         init();
+    }
+
+    @Override
+    public void update(Integer count) {
+        counter.setText(String.valueOf(count));
     }
 
     private void init() {
@@ -33,8 +39,7 @@ public class DashboardCounter extends JPanel {
         add(text);
     }
 
-    private void initComponents(FlatSVGIcon icon, String text, String initialCount) {
-        this.counter.setText(initialCount);
+    private void initComponents(FlatSVGIcon icon, String text) {
         this.text.setText(text);
         icon.setColorFilter(new FlatSVGIcon.ColorFilter().add(Color.BLACK, Palette.MAIN));
         String style = "foreground : " + Palette.MAIN_HEX;
