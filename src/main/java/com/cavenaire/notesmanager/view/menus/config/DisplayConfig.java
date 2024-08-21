@@ -1,6 +1,7 @@
 package com.cavenaire.notesmanager.view.menus.config;
 
 import com.cavenaire.notesmanager.view.menus.Display;
+import com.cavenaire.notesmanager.view.menus.customers.CustomersMenuTable;
 import com.cavenaire.notesmanager.view.menus.dashboard.Counters;
 import com.cavenaire.notesmanager.view.menus.dashboard.DashTaskBar;
 
@@ -33,8 +34,8 @@ public class DisplayConfig {
     }
 
     @Bean
-    public Display customers() {
-        return new Display<>(new JLabel("Clientes"), new JLabel());
+    public Display customers(CustomersMenuTable customersMenuTable) {
+        return new Display<>(new JLabel("Clientes"), customersMenuTable);
     }
 
     @Bean
