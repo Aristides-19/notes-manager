@@ -1,5 +1,6 @@
 package com.cavenaire.notesmanager.view.ui;
 
+import com.cavenaire.notesmanager.view.utils.IconLoader;
 import org.springframework.stereotype.Component;
 import rob.camick.tools.ComponentResizer;
 import rob.camick.tools.ComponentMover;
@@ -28,8 +29,7 @@ public class MainUI extends JFrame {
     private void init() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1280, 800);
-    
-        setIconImage(Toolkit.getDefaultToolkit().createImage(ClassLoader.getSystemResource("images/icon.png")));
+        setIconImage(IconLoader.loadIcon());
 
         setLocationRelativeTo(null);
         setUndecorated(true);
