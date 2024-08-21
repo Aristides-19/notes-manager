@@ -50,6 +50,7 @@ public class NavBarHandler {
             case "clients":
                 b.addActionListener(e -> {
                     changeSelection(b);
+                    controller.updateCustomers();
                     mainDisplay.onCustomers();
                 });
                 break;

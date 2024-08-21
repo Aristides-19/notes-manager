@@ -3,6 +3,7 @@ package com.cavenaire.notesmanager.controller;
 import com.cavenaire.notesmanager.model.customer.Customer;
 import com.cavenaire.notesmanager.model.customer.service.CustomerService;
 import com.cavenaire.notesmanager.model.invoicerecord.service.InvoiceService;
+import com.cavenaire.notesmanager.view.observer.menus.CustomersObservable;
 import com.cavenaire.notesmanager.view.observer.menus.DashboardObservable;
 
 import lombok.RequiredArgsConstructor;
@@ -18,9 +19,10 @@ public class Controller {
     private final InvoiceService invoiceService;
     // OBSERVERS
     private final DashboardObservable dashboardObservable;
+    private final CustomersObservable customersObservable;
 
     public void updateDashboard() {
-        WorkerHandler<Object[]> worker = new WorkerHandler<>(() -> {
+        var worker = new WorkerHandler<>(() -> {
             var latestCustomer = customerService.getByLastTimestamp();
             var customersCount = customerService.getCount();
             var typesCount = customerService.getCountByType();
@@ -36,5 +38,12 @@ public class Controller {
         }, serviceHandler.getViewErrorNotifier());
         serviceHandler.handleServiceCall(worker::execute, "No se pudo actualizar el menú principal, inténtalo de nuevo",
                 "Failed to update dashboard");
+    }
+
+    public void updateCustomers() {
+        var worker = new WorkerHandler<>(() -> customerService.findAll(25),
+                customersObservable::updateCustomersTable, serviceHandler.getViewErrorNotifier());
+        serviceHandler.handleServiceCall(worker::execute, "No se pudo actualizar la tabla de clientes, inténtalo de nuevo",
+                "Failed to update customers table");
     }
 }

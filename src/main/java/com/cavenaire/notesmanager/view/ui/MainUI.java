@@ -28,6 +28,8 @@ public class MainUI extends JFrame {
     private void init() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1280, 800);
+    
+        setIconImage(Toolkit.getDefaultToolkit().createImage(ClassLoader.getSystemResource("images/icon.png")));
 
         setLocationRelativeTo(null);
         setUndecorated(true);
