@@ -4,6 +4,7 @@ import com.cavenaire.notesmanager.view.styles.FontPalette;
 import com.cavenaire.notesmanager.view.styles.Palette;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import lombok.Getter;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -12,7 +13,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 /**
- * MenuTextField, it is used to perform search queries on menu tables.
+ * MenuTextField, it is used to perform search queries on menu tables and fields to create objects.
  */
 public class MenuTextField extends JPanel {
 
@@ -75,7 +76,9 @@ public class MenuTextField extends JPanel {
     // VARIABLES
     private final String defaultText;
     // COMPONENTS
+    @Getter
     private final JButton searchButton;
+    @Getter
     private final JTextField textField;
     // COMMONS
     private static final Dimension SIZE = new Dimension(356, 0);

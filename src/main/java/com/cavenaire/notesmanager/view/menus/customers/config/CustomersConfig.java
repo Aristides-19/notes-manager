@@ -3,15 +3,22 @@ package com.cavenaire.notesmanager.view.menus.customers.config;
 import com.cavenaire.notesmanager.model.customer.Customer;
 import com.cavenaire.notesmanager.view.components.menus.MenuButton;
 import com.cavenaire.notesmanager.view.components.menus.MenuTextField;
+import com.cavenaire.notesmanager.view.handlers.SearchQueryHandler;
 import com.cavenaire.notesmanager.view.table.models.CustomerTableModel;
 import com.cavenaire.notesmanager.view.table.MenuTable;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 
 @Configuration
+@Setter(onMethod_ = @Autowired, onParam_ = @Lazy)
 public class CustomersConfig {
+
+    private SearchQueryHandler queryHandler;
 
     @Bean
     public MenuTable<Customer> customersTable() {
@@ -25,7 +32,9 @@ public class CustomersConfig {
 
     @Bean
     public MenuTextField searchCustomers() {
-        return new MenuTextField(new FlatSVGIcon("images/menus/search.svg"), "Búsqueda");
+        var searchField = new MenuTextField(new FlatSVGIcon("images/menus/search.svg"), "Búsqueda");
+        queryHandler.initHandler(searchField, "customers");
+        return searchField;
     }
 
     @Bean

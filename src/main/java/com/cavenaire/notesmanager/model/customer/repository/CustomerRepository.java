@@ -74,12 +74,7 @@ public class CustomerRepository implements EntityRepository<Customer> {
     }
 
     public Map<String, Integer> getCountByType() {
-        String sql = "SELECT " +
-                "CASE " +
-                "    WHEN document LIKE 'J%' THEN 'juridical' " +
-                "    ELSE 'natural' " +
-                "END as type, " +
-                "count(*) AS count " +
+        String sql = "SELECT CASE WHEN document LIKE 'J%' THEN 'juridical' ELSE 'natural' END as type, count(*) AS count " +
                 "FROM customers " +
                 "GROUP BY type";
         var results = jdbcTemplate.queryForList(sql);
@@ -103,22 +98,29 @@ public class CustomerRepository implements EntityRepository<Customer> {
 
     public Customer getById(Long id) {
         String sql = "SELECT * FROM customers WHERE customer_id = ?";
-        return jdbcTemplate.queryForObject(sql, customerMapper);
+        return jdbcTemplate.queryForObject(sql, customerMapper, id);
     }
 
     public List<Customer> findAllByName(String query) {
-        String queryType = query.length() < 3 ? "LIKE ?)" : "MATCH ?)";
-        String escapedQuery = String.format("\"%s\"", query);
+        if (query.isEmpty()) {
+            return findAll(25);
+        } else if (query.length() < 3) {
+            throw new DataAccessResourceFailureException("query must be longer than 2 characters");
+        }
         String sql = "SELECT * FROM customers WHERE customer_id IN " +
-                "(SELECT rowid FROM trigram_customers WHERE full_name " + queryType;
-        return jdbcTemplate.query(sql, customerMapper, escapedQuery);
+                "(SELECT rowid FROM trigram_customers WHERE full_name MATCH ?)";
+        return jdbcTemplate.query(sql, customerMapper, String.format("\"%s\"", query));
     }
 
     public List<Customer> findAllByDoc(String query) {
-        String escapedQuery = String.format("\"%s\"", query);
+        if (query.isEmpty()) {
+            return findAll(25);
+        } else if (query.length() < 3) {
+            throw new DataAccessResourceFailureException("query must be longer than 2 characters");
+        }
         String sql = "SELECT * FROM customers WHERE customer_id IN " +
                 "(SELECT rowid FROM trigram_customers WHERE document MATCH ?)";
-        return jdbcTemplate.query(sql, customerMapper, escapedQuery);
+        return jdbcTemplate.query(sql, customerMapper, String.format("\"%s\"", query));
     }
 
     public List<Customer> findAll(int limit) {
