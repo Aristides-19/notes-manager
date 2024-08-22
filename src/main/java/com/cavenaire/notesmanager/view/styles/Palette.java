@@ -37,6 +37,11 @@ public class Palette {
     public static Color SECONDARY_BACKGROUND = new Color(255, 255, 255, 255);
     public static String SECONDARY_BACKGROUND_HEX = "#FFFFFF";
     /**
+     * TEXT_FIELD color, it is used to show a default text for text fields.
+     */
+    public static Color TEXT_FIELD = new Color(22, 27, 70, 64);
+    public static String TEXT_FIELD_HEX = "#161B4640";
+    /**
      * BORDER color, table borders and separators.
      */
     public static Color BORDER = new Color(22, 27, 70, 25);

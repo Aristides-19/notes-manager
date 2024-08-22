@@ -43,7 +43,7 @@ public class MainUI extends JFrame {
     }
 
     private void initCResizer() {
-        cr.setMinimumSize(new Dimension(960, 600));
+        cr.setMinimumSize(new Dimension(960, 615));
         cr.setMaximumSize(new Dimension(1280, 800));
         cr.setSnapSize(new Dimension(1, 1));
     }

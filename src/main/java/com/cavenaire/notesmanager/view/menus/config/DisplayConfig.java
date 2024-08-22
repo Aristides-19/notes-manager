@@ -2,10 +2,10 @@ package com.cavenaire.notesmanager.view.menus.config;
 
 import com.cavenaire.notesmanager.view.menus.Display;
 import com.cavenaire.notesmanager.view.menus.customers.CustomersMenuTable;
+import com.cavenaire.notesmanager.view.menus.customers.CustomersTaskBar;
 import com.cavenaire.notesmanager.view.menus.dashboard.Counters;
 import com.cavenaire.notesmanager.view.menus.dashboard.DashTaskBar;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,7 +18,6 @@ import javax.swing.*;
 public class DisplayConfig {
 
     @Bean
-    @Autowired
     public Display dashboard(DashTaskBar tb, Counters c) {
         return new Display<>(tb, c);
     }
@@ -34,8 +33,8 @@ public class DisplayConfig {
     }
 
     @Bean
-    public Display customers(CustomersMenuTable customersMenuTable) {
-        return new Display<>(new JLabel("Clientes"), customersMenuTable);
+    public Display customers(CustomersTaskBar ctb, CustomersMenuTable cmt) {
+        return new Display<>(ctb, cmt);
     }
 
     @Bean

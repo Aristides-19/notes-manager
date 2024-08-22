@@ -2,6 +2,7 @@ package com.cavenaire.notesmanager.view.menus.customers.config;
 
 import com.cavenaire.notesmanager.model.customer.Customer;
 import com.cavenaire.notesmanager.view.components.menus.MenuButton;
+import com.cavenaire.notesmanager.view.components.menus.MenuTextField;
 import com.cavenaire.notesmanager.view.table.models.CustomerTableModel;
 import com.cavenaire.notesmanager.view.table.MenuTable;
 
@@ -20,5 +21,15 @@ public class CustomersConfig {
     @Bean
     public MenuButton addCustomer() {
         return new MenuButton(new FlatSVGIcon("images/menus/add.svg"), "Nuevo Cliente", 7);
+    }
+
+    @Bean
+    public MenuTextField searchCustomers() {
+        return new MenuTextField(new FlatSVGIcon("images/menus/search.svg"), "Búsqueda");
+    }
+
+    @Bean
+    public MenuButton exportCustomers() {
+        return new MenuButton(new FlatSVGIcon("images/menus/export.svg"), "Exportar", 15);
     }
 }

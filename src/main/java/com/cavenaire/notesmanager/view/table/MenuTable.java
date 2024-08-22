@@ -8,8 +8,6 @@ import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
 
 /**
@@ -43,19 +41,16 @@ public class MenuTable<T> extends JTable implements Observable<List<T>> {
                         "; background : " + Palette.SECONDARY_BACKGROUND_HEX +
                         "; selectionBackground : " + Palette.BACKGROUND_HEX +
                         "; selectionForeground : " + Palette.MAIN_HEX +
+                        "; selectionInactiveBackground : " + Palette.BACKGROUND_HEX +
+                        "; selectionInactiveForeground : " + Palette.MAIN_HEX +
                         "; rowHeight : 53" +
                         "; cellMargins: 0,25,0,0");
+
         scrollPane.setBorder(BorderFactory.createLineBorder(Palette.BORDER, 1, true));
+        scrollPane.setPreferredSize(new Dimension(0, 0));
 
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                clearSelection();
-            }
-        });
     }
 
     private void initColumns(int... columnWidths) {
@@ -72,6 +67,7 @@ public class MenuTable<T> extends JTable implements Observable<List<T>> {
 
     private void initHeader() {
         var header = getTableHeader();
+        header.setReorderingAllowed(false);
 
         header.putClientProperty("FlatLaf.style",
                 "foreground : " + Palette.MAIN_HEX +
