@@ -2,6 +2,7 @@ package com.cavenaire.notesmanager.view.handlers;
 
 import com.cavenaire.notesmanager.controller.Controller;
 import com.cavenaire.notesmanager.view.components.menus.MenuTextField;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,7 @@ public class SearchQueryHandler {
         switch (type) {
             case "customers":
                 var textField = field.getTextField();
-                ActionListener event = (e) -> controller.findCustomersByName(textField.getText());
+                ActionListener event = (e) -> controller.findCustomersByName(textField.getText().equals(field.getDefaultText()) ? textField.getText() : "");
                 textField.addActionListener(event);
                 field.getSearchButton().addActionListener(event);
                 break;
