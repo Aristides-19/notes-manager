@@ -16,9 +16,11 @@ CREATE TABLE IF NOT EXISTS invoice_records
     invoice_id  INTEGER PRIMARY KEY,
     customer_id INTEGER NOT NULL,
     created_on  TEXT    NOT NULL,
-    tax_base    REAL    NOT NULL,
+    subtotal    REAL    NOT NULL,
+    tax         REAL    NOT NULL,
     total       REAL    NOT NULL,
     status      INTEGER NOT NULL DEFAULT 0,
+    comment     TEXT    NOT NULL DEFAULT '',
     FOREIGN KEY (customer_id)
         REFERENCES customers (customer_id)
         ON DELETE CASCADE
@@ -30,9 +32,9 @@ CREATE TABLE IF NOT EXISTS note_entries
     note_id     INTEGER PRIMARY KEY,
     customer_id INTEGER NOT NULL,
     created_on  TEXT    NOT NULL,
-    total_bs    REAL    NOT NULL DEFAULT 0,
-    total_us    REAL    NOT NULL DEFAULT 0,
+    total       REAL    NOT NULL DEFAULT 0,
     status      INTEGER NOT NULL DEFAULT 0,
+    comment     TEXT    NOT NULL DEFAULT '',
     FOREIGN KEY (customer_id)
         REFERENCES customers (customer_id)
         ON DELETE CASCADE
@@ -41,11 +43,11 @@ CREATE TABLE IF NOT EXISTS note_entries
 -- INVOICE RECORD PRODUCTS TABLE
 CREATE TABLE IF NOT EXISTS invoice_record_products
 (
-    product_id  INTEGER PRIMARY KEY,
-    invoice_id  INTEGER NOT NULL,
-    quantity    INTEGER NOT NULL DEFAULT 1,
-    description TEXT    NOT NULL,
-    price       REAL    NOT NULL DEFAULT 0,
+    product_id    INTEGER PRIMARY KEY,
+    invoice_id    INTEGER NOT NULL,
+    quantity      INTEGER NOT NULL DEFAULT 1,
+    description   TEXT    NOT NULL,
+    unit_price_bs REAL    NOT NULL DEFAULT 0,
     FOREIGN KEY (invoice_id)
         REFERENCES invoice_records (invoice_id)
         ON DELETE CASCADE
@@ -54,12 +56,11 @@ CREATE TABLE IF NOT EXISTS invoice_record_products
 -- NOTE ENTRY PRODUCTS TABLE
 CREATE TABLE IF NOT EXISTS note_entry_products
 (
-    product_id  INTEGER PRIMARY KEY,
-    note_id     INTEGER NOT NULL,
-    quantity    INTEGER NOT NULL DEFAULT 1,
-    description TEXT    NOT NULL,
-    price_bs    REAL    NOT NULL DEFAULT 0,
-    price_us    REAL    NOT NULL DEFAULT 0,
+    product_id     INTEGER PRIMARY KEY,
+    note_id        INTEGER NOT NULL,
+    quantity       INTEGER NOT NULL DEFAULT 1,
+    description    TEXT    NOT NULL,
+    unit_price_usd REAL    NOT NULL DEFAULT 0,
     FOREIGN KEY (note_id)
         REFERENCES note_entries (note_id)
         ON DELETE CASCADE

@@ -26,7 +26,7 @@ public class InvoiceProductRepository implements EntityRepository<InvoiceRecordP
 
     @Override
     public InvoiceRecordProduct save(@NonNull InvoiceRecordProduct product) {
-        String sql = "INSERT INTO invoice_record_products(invoice_id, quantity, description, price)" +
+        String sql = "INSERT INTO invoice_record_products(invoice_id, quantity, description, unit_price_bs)" +
                 "VALUES (?, ?, ?, ?);";
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -35,7 +35,7 @@ public class InvoiceProductRepository implements EntityRepository<InvoiceRecordP
             ps.setLong(1, product.getInvoiceId());
             ps.setInt(2, product.getQuantity());
             ps.setString(3, product.getDescription());
-            ps.setDouble(4, product.getPrice());
+            ps.setDouble(4, product.getUnitPrice());
             return ps;
         }, keyHolder);
 
@@ -56,10 +56,10 @@ public class InvoiceProductRepository implements EntityRepository<InvoiceRecordP
     @Override
     public void update(@NonNull InvoiceRecordProduct product) {
         String sql = "UPDATE invoice_record_products " +
-                "SET invoice_id = ?, quantity = ?, description = ?, price = ?" +
+                "SET invoice_id = ?, quantity = ?, description = ?, unit_price_bs = ?" +
                 "WHERE product_id = ?";
         jdbcTemplate.update(sql, product.getInvoiceId(), product.getQuantity(), product.getDescription(),
-                product.getPrice(), product.getProductId());
+                product.getUnitPrice(), product.getProductId());
     }
 
     public List<InvoiceRecordProduct> findAllByInvoiceId(Long id) {

@@ -14,7 +14,7 @@ public class InvoiceProductMapper implements RowMapper<InvoiceRecordProduct> {
                 .invoiceId(rs.getLong("invoice_id"))
                 .quantity(rs.getInt("quantity"))
                 .description(rs.getString("description"))
-                .price(rs.getDouble("price"))
+                .unitPrice(rs.getDouble("unit_price_bs"))
                 .build();
     }
 }

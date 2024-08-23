@@ -2,9 +2,11 @@ package com.cavenaire.notesmanager.model.invoicerecord;
 
 import com.cavenaire.notesmanager.model.customer.Customer;
 import com.cavenaire.notesmanager.model.invoiceproduct.InvoiceRecordProduct;
+
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,17 +31,29 @@ public class InvoiceRecord {
      */
     private LocalDate createdOn;
     /**
-     * The tax base must be 16% of the total. Base Imponible – IVA
+     * The subtotal amount, it is the tax base. Base Imponible
      */
-    private double taxBase;
+    @Setter(AccessLevel.NONE)
+    private double subtotal;
     /**
-     * Total Amount in Bolivars – Bs. N
+     * Invoice's tax, it is 16% of subtotal amount.
      */
-    private double totalAmount;
+    @Setter(AccessLevel.NONE)
+    private double tax;
+    /**
+     * Total Amount in Bolivars – Bs. N. <br/>
+     * Sum of subtotal + tax
+     */
+    @Setter(AccessLevel.NONE)
+    private double total;
     /**
      * Invoice Record's status. Zero(0) is DRAFT and One(1) is FINISHED.
      */
     private byte status;
+    /**
+     * Invoice Record's optional comment at the invoice's endline.
+     */
+    private String comment;
     /**
      * Invoice Record's products.
      */
@@ -49,4 +63,25 @@ public class InvoiceRecord {
      */
     private Customer customer;
 
+    /**
+     * Add product to the product list. It calls {@code updateAmounts} after insertion.
+     *
+     * @param product product to be added
+     */
+    public void addProduct(InvoiceRecordProduct product) {
+        if (products == null) {
+            products = new ArrayList<>();
+        }
+        products.add(product);
+        updateAmounts();
+    }
+
+    /**
+     * Updates subtotal, tax and total amounts. It is auto-called after {@code addProduct} operation.
+     */
+    public void updateAmounts() {
+        subtotal = products.stream().mapToDouble(InvoiceRecordProduct::getPrice).sum();
+        tax = subtotal * 0.16;
+        total = subtotal + tax;
+    }
 }

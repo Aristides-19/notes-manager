@@ -27,17 +27,19 @@ public class InvoiceRepository implements EntityRepository<InvoiceRecord> {
 
     @Override
     public InvoiceRecord save(@NonNull InvoiceRecord invoiceRecord) {
-        String sql = "INSERT INTO invoice_records(customer_id, created_on, tax_base, total, status)" +
-                "VALUES (?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO invoice_records(customer_id, created_on, subtotal, tax, total, status, comment)" +
+                "VALUES (?, ?, ?, ?, ?, ?, ?);";
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(sql, new String[]{"invoice_id"});
             ps.setLong(1, invoiceRecord.getCustomerId());
             ps.setString(2, invoiceRecord.getCreatedOn().toString());
-            ps.setDouble(3, invoiceRecord.getTaxBase());
-            ps.setDouble(4, invoiceRecord.getTotalAmount());
-            ps.setByte(5, invoiceRecord.getStatus());
+            ps.setDouble(3, invoiceRecord.getSubtotal());
+            ps.setDouble(4, invoiceRecord.getTax());
+            ps.setDouble(5, invoiceRecord.getTotal());
+            ps.setByte(6, invoiceRecord.getStatus());
+            ps.setString(7, invoiceRecord.getComment());
             return ps;
         }, keyHolder);
 
@@ -58,10 +60,10 @@ public class InvoiceRepository implements EntityRepository<InvoiceRecord> {
     @Override
     public void update(@NonNull InvoiceRecord invoiceRecord) {
         String sql = "UPDATE invoice_records " +
-                "SET customer_id = ?, created_on = ?, tax_base = ?, total = ?, status = ?" +
+                "SET customer_id = ?, created_on = ?, subtotal = ?, tax = ?, total = ?, status = ?, comment = ?" +
                 "WHERE invoice_id = ?";
-        jdbcTemplate.update(sql, invoiceRecord.getCustomerId(), invoiceRecord.getCreatedOn(), invoiceRecord.getTaxBase(),
-                invoiceRecord.getTotalAmount(), invoiceRecord.getStatus());
+        jdbcTemplate.update(sql, invoiceRecord.getCustomerId(), invoiceRecord.getCreatedOn(), invoiceRecord.getSubtotal(),
+                invoiceRecord.getTax(), invoiceRecord.getTotal(), invoiceRecord.getStatus(), invoiceRecord.getComment());
     }
 
     public int getCount() {
@@ -84,14 +86,14 @@ public class InvoiceRepository implements EntityRepository<InvoiceRecord> {
 
     public List<InvoiceRecord> findAllByCustomerId(Long id) {
         String sql = "SELECT * FROM invoice_records WHERE customer_id = ?";
-        return jdbcTemplate.query(sql, invoiceMapper);
+        return jdbcTemplate.query(sql, invoiceMapper, id);
     }
 
     public List<InvoiceRecord> findAllByDate(String query, int limit) {
         String sql = "SELECT * FROM invoice_records " +
-                "WHERE strftime('%d-%m-%Y', created_on, 'localtime') LIKE '?%' " +
+                "WHERE strftime('%d-%m-%Y', created_on, 'localtime') LIKE ? " +
                 "ORDER BY date(created_on, 'localtime') DESC LIMIT ?";
-        return jdbcTemplate.query(sql, invoiceMapper, query, limit);
+        return jdbcTemplate.query(sql, invoiceMapper, query + "%", limit);
     }
 
     public List<InvoiceRecord> findAll(int limit) {

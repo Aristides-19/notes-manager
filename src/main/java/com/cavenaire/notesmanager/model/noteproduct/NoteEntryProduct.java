@@ -28,12 +28,14 @@ public class NoteEntryProduct {
      */
     private String description;
     /**
-     * Product's Price in Bolivars – Bs. N
+     * Product's Unit Price in USD – N $
      */
-    private double priceBs;
-    /**
-     * Product's Price in USD Dollars – N $
-     */
-    private double priceUsd;
+    private double unitPrice;
 
+    /**
+     * Product's Total Price in USD – N$, based in quantity.
+     */
+    public double getPrice() {
+        return quantity * unitPrice;
+    }
 }

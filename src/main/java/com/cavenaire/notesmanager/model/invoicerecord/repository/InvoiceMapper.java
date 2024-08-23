@@ -16,9 +16,11 @@ public class InvoiceMapper implements RowMapper<InvoiceRecord> {
                 .invoiceId(rs.getLong("invoice_id"))
                 .customerId(rs.getLong("customer_id"))
                 .createdOn(LocalDate.parse(rs.getString("created_on"), DateTimeFormatter.ISO_DATE_TIME))
-                .taxBase(rs.getDouble("tax_base"))
-                .totalAmount(rs.getDouble("total"))
+                .subtotal(rs.getDouble("subtotal"))
+                .tax(rs.getDouble("tax"))
+                .total(rs.getDouble("total"))
                 .status(rs.getByte("status"))
+                .comment(rs.getString("commnet"))
                 .build();
     }
 }

@@ -31,8 +31,15 @@ public class InvoiceRecordProduct {
      */
     private String description;
     /**
-     * Product's Price in Bolivars – Bs. N
+     * Product's Unit Price in Bolivars – Bs. N
      */
-    private double price;
+    private double unitPrice;
+
+    /**
+     * Product's Total Price in Bolivars – Bs. N, based in quantity.
+     */
+    public double getPrice() {
+        return quantity * unitPrice;
+    }
 
 }
