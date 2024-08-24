@@ -22,24 +22,18 @@ public class TitleBarHandler {
 
     public void initHandler(TitleButton b, String type) {
         switch (type) {
-            case "close":
-                b.addActionListener(e -> onClose());
-                break;
-            case "maximize":
-                b.addActionListener(e -> {
-                    b.changeIconState();
-                    if (b.getState() == 0) {
-                        onMaximize();
-                        b.setState((byte) 1);
-                    } else {
-                        onResized();
-                        b.setState((byte) 0);
-                    }
-                });
-                break;
-            case "minimize":
-                b.addActionListener(e -> onMinimize());
-                break;
+            case "close" -> b.addActionListener(e -> onClose());
+            case "maximize" -> b.addActionListener(e -> {
+                b.changeIconState();
+                if (b.getState() == 0) {
+                    onMaximize();
+                    b.setState((byte) 1);
+                } else {
+                    onResized();
+                    b.setState((byte) 0);
+                }
+            });
+            case "minimize" -> b.addActionListener(e -> onMinimize());
         }
     }
 

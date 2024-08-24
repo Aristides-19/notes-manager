@@ -8,6 +8,7 @@ import com.cavenaire.notesmanager.model.invoicerecord.service.InvoiceService;
 
 import static com.cavenaire.notesmanager.model.ServiceLayerException.*;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,17 +32,17 @@ public class CustomerService implements EntityService<Customer> {
     private InvoiceService invoiceService;
 
     @Override
-    public Customer save(Customer customer) throws ServiceLayerException {
+    public Customer save(@NonNull Customer customer) throws ServiceLayerException {
         return exceptionHandler(() -> customerRepository.save(customer));
     }
 
     @Override
-    public void delete(Customer customer) throws ServiceLayerException {
+    public void delete(@NonNull Customer customer) throws ServiceLayerException {
         exceptionHandler(() -> customerRepository.delete(customer));
     }
 
     @Override
-    public void update(Customer customer) throws ServiceLayerException {
+    public void update(@NonNull Customer customer) throws ServiceLayerException {
         exceptionHandler(() -> customerRepository.update(customer));
     }
 

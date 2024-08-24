@@ -17,18 +17,13 @@ public class CustomerTableModel extends MenuTableModel<Customer> {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Customer row = rows.get(rowIndex);
-        switch (columnIndex) {
-            case 0:
-                return row.getCustomerId();
-            case 1:
-                return row.getFullName();
-            case 2:
-                return row.getContact();
-            case 3:
-                return row.getDocument();
-            case 4:
-                return row.getAddress();
-        }
-        return null;
+        return switch (columnIndex) {
+            case 0 -> row.getCustomerId();
+            case 1 -> row.getFullName();
+            case 2 -> row.getContact();
+            case 3 -> row.getDocument();
+            case 4 -> row.getAddress();
+            default -> null;
+        };
     }
 }

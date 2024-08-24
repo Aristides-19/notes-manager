@@ -28,44 +28,32 @@ public class NavBarHandler {
         }
 
         switch (type) {
-            case "menu":
-                b.addActionListener(e -> {
-                    changeSelection(b);
-                    controller.updateDashboard();
-                    mainDisplay.onMenu();
-                });
-                break;
-            case "invoices":
-                b.addActionListener(e -> {
-                    changeSelection(b);
-                    mainDisplay.onInvoices();
-                });
-                break;
-            case "notes":
-                b.addActionListener(e -> {
-                    changeSelection(b);
-                    mainDisplay.onNotes();
-                });
-                break;
-            case "clients":
-                b.addActionListener(e -> {
-                    changeSelection(b);
-                    controller.updateCustomers();
-                    mainDisplay.onCustomers();
-                });
-                break;
-            case "settings":
-                b.addActionListener(e -> {
-                    changeSelection(b);
-                    mainDisplay.onSettings();
-                });
-                break;
-            case "help":
-                b.addActionListener(e -> {
-                    changeSelection(b);
-                    mainDisplay.onHelp();
-                });
-                break;
+            case "menu" -> b.addActionListener(e -> {
+                changeSelection(b);
+                controller.updateDashboard();
+                mainDisplay.onMenu();
+            });
+            case "invoices" -> b.addActionListener(e -> {
+                changeSelection(b);
+                mainDisplay.onInvoices();
+            });
+            case "notes" -> b.addActionListener(e -> {
+                changeSelection(b);
+                mainDisplay.onNotes();
+            });
+            case "clients" -> b.addActionListener(e -> {
+                changeSelection(b);
+                controller.updateCustomers();
+                mainDisplay.onCustomers();
+            });
+            case "settings" -> b.addActionListener(e -> {
+                changeSelection(b);
+                mainDisplay.onSettings();
+            });
+            case "help" -> b.addActionListener(e -> {
+                changeSelection(b);
+                mainDisplay.onHelp();
+            });
         }
     }
 

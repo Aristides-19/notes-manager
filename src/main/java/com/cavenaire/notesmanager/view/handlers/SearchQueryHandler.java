@@ -19,12 +19,12 @@ public class SearchQueryHandler {
 
     public void initHandler(MenuTextField field, String type) {
         switch (type) {
-            case "customers":
+            case "customers" -> {
                 var textField = field.getTextField();
                 ActionListener event = (e) -> controller.findCustomersByName(textField.getText().equals(field.getDefaultText()) ? textField.getText() : "");
                 textField.addActionListener(event);
                 field.getSearchButton().addActionListener(event);
-                break;
+            }
         }
     }
 }
