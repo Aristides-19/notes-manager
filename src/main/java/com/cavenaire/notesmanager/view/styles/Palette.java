@@ -46,4 +46,9 @@ public class Palette {
      */
     public static Color BORDER = new Color(22, 27, 70, 25);
     public static String BORDER_HEX = "#161B4619";
+    /**
+     * ERROR_BORDER color, to show error in text fields.
+     */
+    public static Color ERROR_BORDER = new Color(255, 0, 0, 75);
+    public static String ERROR_BORDER_HEX = "#FF00004B";
 }

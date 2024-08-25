@@ -11,7 +11,7 @@ import java.util.List;
  * @param <T> Business object which represents rows
  */
 @RequiredArgsConstructor
-public abstract class MenuTableModel<T> extends AbstractTableModel {
+public abstract class AbstractMenuTableModel<T> extends AbstractTableModel {
 
     protected final String[] columnNames;
     protected List<T> rows;

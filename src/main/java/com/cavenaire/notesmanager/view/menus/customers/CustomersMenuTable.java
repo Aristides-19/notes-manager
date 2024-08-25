@@ -2,7 +2,7 @@ package com.cavenaire.notesmanager.view.menus.customers;
 
 import com.cavenaire.notesmanager.model.customer.Customer;
 import com.cavenaire.notesmanager.view.components.menus.MenuButton;
-import com.cavenaire.notesmanager.view.components.menus.MenuTextField;
+import com.cavenaire.notesmanager.view.components.menus.textfield.SearchTextField;
 import com.cavenaire.notesmanager.view.styles.Palette;
 import com.cavenaire.notesmanager.view.table.MenuTable;
 
@@ -20,7 +20,7 @@ import java.awt.*;
 @Component
 public class CustomersMenuTable extends JPanel {
 
-    public CustomersMenuTable(MenuTable<Customer> customersTable, MenuTextField searchCustomers, MenuButton addCustomer) {
+    public CustomersMenuTable(MenuTable<Customer> customersTable, SearchTextField searchCustomers, MenuButton addCustomer) {
         super();
         this.customersTable = customersTable;
         this.searchCustomers = searchCustomers;
@@ -41,6 +41,6 @@ public class CustomersMenuTable extends JPanel {
 
     // COMPONENTS
     private final MenuTable<Customer> customersTable;
-    private final MenuTextField searchCustomers;
+    private final SearchTextField searchCustomers;
     private final MenuButton addCustomer;
 }

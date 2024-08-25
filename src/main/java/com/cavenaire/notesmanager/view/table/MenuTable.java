@@ -3,7 +3,7 @@ package com.cavenaire.notesmanager.view.table;
 import com.cavenaire.notesmanager.view.observer.Observable;
 import com.cavenaire.notesmanager.view.styles.FontPalette;
 import com.cavenaire.notesmanager.view.styles.Palette;
-import com.cavenaire.notesmanager.view.table.models.MenuTableModel;
+import com.cavenaire.notesmanager.view.table.models.AbstractMenuTableModel;
 import lombok.Getter;
 
 import javax.swing.*;
@@ -18,11 +18,11 @@ import java.util.List;
  */
 public class MenuTable<T> extends JTable implements Observable<List<T>> {
 
-    private final MenuTableModel<T> viewTableModel;
+    private final AbstractMenuTableModel<T> viewTableModel;
     @Getter
     private final JScrollPane scrollPane = new JScrollPane(this);
 
-    public MenuTable(MenuTableModel<T> viewTableModel, int... columnWidths) {
+    public MenuTable(AbstractMenuTableModel<T> viewTableModel, int... columnWidths) {
         super(viewTableModel);
         this.viewTableModel = viewTableModel;
         initHeader();

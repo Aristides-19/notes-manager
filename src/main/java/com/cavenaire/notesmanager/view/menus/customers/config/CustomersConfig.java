@@ -2,7 +2,7 @@ package com.cavenaire.notesmanager.view.menus.customers.config;
 
 import com.cavenaire.notesmanager.model.customer.Customer;
 import com.cavenaire.notesmanager.view.components.menus.MenuButton;
-import com.cavenaire.notesmanager.view.components.menus.MenuTextField;
+import com.cavenaire.notesmanager.view.components.menus.textfield.SearchTextField;
 import com.cavenaire.notesmanager.view.handlers.SearchQueryHandler;
 import com.cavenaire.notesmanager.view.table.models.CustomerTableModel;
 import com.cavenaire.notesmanager.view.table.MenuTable;
@@ -31,8 +31,8 @@ public class CustomersConfig {
     }
 
     @Bean
-    public MenuTextField searchCustomers() {
-        var searchField = new MenuTextField(new FlatSVGIcon("images/menus/search.svg"), "Búsqueda");
+    public SearchTextField searchCustomers() {
+        var searchField = new SearchTextField("Búsqueda", 356, "10", "15", "10", "15");
         queryHandler.initHandler(searchField, "customers");
         return searchField;
     }

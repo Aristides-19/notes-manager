@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Implementation for Customers Table Model
  */
-public class CustomerTableModel extends MenuTableModel<Customer> {
+public class CustomerTableModel extends AbstractMenuTableModel<Customer> {
 
     public CustomerTableModel() {
         super(new String[]{"#", "Nombre", "Contacto", "Documento", "Dirección"});
