@@ -9,7 +9,7 @@ import com.cavenaire.notesmanager.model.invoicerecord.repository.InvoiceReposito
 
 import static com.cavenaire.notesmanager.model.ServiceLayerException.*;
 
-import lombok.NonNull;
+import org.springframework.lang.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;

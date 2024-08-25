@@ -1,6 +1,6 @@
 package com.cavenaire.notesmanager.model;
 
-import lombok.NonNull;
+import org.springframework.lang.NonNull;
 
 /**
  * Primitive service specification for business objects interaction with {@code EntityRepository}. <br/>

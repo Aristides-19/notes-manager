@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import lombok.NonNull;
+import org.springframework.lang.NonNull;
 
 import java.sql.PreparedStatement;
 import java.util.HashMap;

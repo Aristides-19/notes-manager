@@ -1,6 +1,6 @@
 package com.cavenaire.notesmanager.model;
 
-import lombok.NonNull;
+import org.springframework.lang.NonNull;
 
 /**
  * Primitive repository specification for business objects interaction with the database. <br/>

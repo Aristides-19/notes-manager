@@ -7,7 +7,7 @@ import com.cavenaire.notesmanager.model.invoiceproduct.repository.InvoiceProduct
 
 import static com.cavenaire.notesmanager.model.ServiceLayerException.*;
 
-import lombok.NonNull;
+import org.springframework.lang.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

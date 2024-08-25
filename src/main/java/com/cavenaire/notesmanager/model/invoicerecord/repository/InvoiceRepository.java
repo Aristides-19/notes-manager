@@ -3,7 +3,7 @@ package com.cavenaire.notesmanager.model.invoicerecord.repository;
 import com.cavenaire.notesmanager.model.EntityRepository;
 import com.cavenaire.notesmanager.model.invoicerecord.InvoiceRecord;
 
-import lombok.NonNull;
+import org.springframework.lang.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.jdbc.core.JdbcTemplate;
