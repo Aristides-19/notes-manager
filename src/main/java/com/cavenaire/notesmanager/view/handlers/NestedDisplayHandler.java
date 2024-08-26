@@ -8,9 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+/**
+ * AddEntityHandler, it only gets care of switching between a main display from {@code NavBarHandler} to a
+ * nested display panel. It doesn't offer functionality for components on nested panels.
+ *
+ * @see MainDisplay
+ */
 @Setter(onMethod_ = @Autowired, onParam_ = @Lazy)
 @Component
-public class AddEntityHandler {
+public class NestedDisplayHandler {
 
     private MainDisplay mainDisplay;
 

@@ -10,6 +10,11 @@ import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 
+/**
+ * Add Customer Display Taskbar, it shows the title and back button.
+ *
+ * @see AddCustomerFields
+ */
 @Component
 public class AddCustomerTaskBar extends JPanel {
 

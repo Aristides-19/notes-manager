@@ -15,7 +15,7 @@ import java.awt.event.*;
  * It is intended to be extended for implementations like fields with title, or a search field.
  */
 @Getter
-class MenuTextField extends JPanel {
+public class MenuTextField extends JPanel {
 
     public MenuTextField(String placeholder, int width, String... insets) {
         super();
@@ -30,11 +30,25 @@ class MenuTextField extends JPanel {
     public void showErrorBorder() {
         putClientProperty("FlatLaf.style", "background : " + Palette.SECONDARY_BACKGROUND_HEX +
                 "; border : 0,0,0,0," + Palette.ERROR_BORDER_HEX + ",2,10");
+        onError = true;
     }
 
     public void showRegularBorder() {
         putClientProperty("FlatLaf.style", "background : " + Palette.SECONDARY_BACKGROUND_HEX +
                 "; border : 0,0,0,0," + Palette.BORDER_HEX + ",1,10");
+        onError = false;
+    }
+
+    public void placeholderMode() {
+        onPlaceholder = true;
+        field.setText(placeholder);
+        field.setForeground(Palette.TEXT_FIELD);
+    }
+
+    public void writingMode() {
+        onPlaceholder = false;
+        field.setText("");
+        field.setForeground(Palette.MAIN);
     }
 
     private void init(int width, String... insets) {
@@ -58,16 +72,14 @@ class MenuTextField extends JPanel {
             @Override
             public void focusLost(FocusEvent e) {
                 if (field.getText().isEmpty()) {
-                    field.setText(placeholder);
-                    field.setForeground(Palette.TEXT_FIELD);
+                    placeholderMode();
                 }
             }
 
             @Override
             public void focusGained(FocusEvent e) {
                 if (field.getText().equals(placeholder)) {
-                    field.setText("");
-                    field.setForeground(Palette.MAIN);
+                    writingMode();
                 }
             }
         });
@@ -76,4 +88,6 @@ class MenuTextField extends JPanel {
     // COMPONENTS
     private final String placeholder;
     private final JTextField field;
+    private boolean onError;
+    private boolean onPlaceholder;
 }

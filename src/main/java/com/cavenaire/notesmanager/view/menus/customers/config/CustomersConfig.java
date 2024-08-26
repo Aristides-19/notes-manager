@@ -4,7 +4,8 @@ import com.cavenaire.notesmanager.model.customer.Customer;
 import com.cavenaire.notesmanager.view.components.menus.MenuButton;
 import com.cavenaire.notesmanager.view.components.menus.textfield.EntityAttrTextField;
 import com.cavenaire.notesmanager.view.components.menus.textfield.SearchTextField;
-import com.cavenaire.notesmanager.view.handlers.AddEntityHandler;
+import com.cavenaire.notesmanager.view.handlers.customers.AddCustomerHandler;
+import com.cavenaire.notesmanager.view.handlers.NestedDisplayHandler;
 import com.cavenaire.notesmanager.view.handlers.SearchQueryHandler;
 import com.cavenaire.notesmanager.view.table.models.CustomerTableModel;
 import com.cavenaire.notesmanager.view.table.MenuTable;
@@ -21,7 +22,8 @@ import org.springframework.context.annotation.Lazy;
 public class CustomersConfig {
 
     private SearchQueryHandler queryHandler;
-    private AddEntityHandler addEntityHandler;
+    private NestedDisplayHandler nestedDisplayHandler;
+    private AddCustomerHandler addCustomerHandler;
 
     @Bean
     public MenuTable<Customer> customersTable() {
@@ -31,7 +33,7 @@ public class CustomersConfig {
     @Bean
     public MenuButton addCustomerButton() {
         var addCustomer = new MenuButton(new FlatSVGIcon("images/menus/add.svg"), "Nuevo Cliente", 7);
-        addEntityHandler.initHandler(addCustomer, "customer");
+        nestedDisplayHandler.initHandler(addCustomer, "customer");
         return addCustomer;
     }
 
@@ -59,12 +61,16 @@ public class CustomersConfig {
 
     @Bean
     public EntityAttrTextField fullNameField() {
-        return new EntityAttrTextField("Nombre Completo", true, "John Doe");
+        var fullNameField = new EntityAttrTextField("Nombre Completo", true, "John Doe");
+        addCustomerHandler.initFieldHandler(fullNameField, "fullName");
+        return fullNameField;
     }
 
     @Bean
     public EntityAttrTextField documentField() {
-        return new EntityAttrTextField("Documento", true, "XX.XXX.XXX");
+        var documentField = new EntityAttrTextField("Documento", true, "XX.XXX.XXX");
+        addCustomerHandler.initFieldHandler(documentField, "document");
+        return documentField;
     }
 
     @Bean

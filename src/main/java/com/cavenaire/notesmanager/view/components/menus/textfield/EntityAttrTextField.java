@@ -16,19 +16,24 @@ import javax.swing.*;
 public class EntityAttrTextField extends JPanel {
 
     public EntityAttrTextField(String title, boolean required, String placeholder) {
-        var field = new MenuTextField(placeholder, 0, "15", "15", "15", "15");
-        this.field = field.getField();
-        this.placeholder = field.getPlaceholder();
+        this.fieldContainer = new MenuTextField(placeholder, 0, "15", "15", "15", "15");
+        this.field = fieldContainer.getField();
+        this.placeholder = fieldContainer.getPlaceholder();
         this.required = required;
         this.title = new JLabel(getMultiColorText(title, required));
-        init(field);
+        init();
     }
 
-    private void init(MenuTextField field) {
+    public void resetField() {
+        fieldContainer.showRegularBorder();
+        fieldContainer.placeholderMode();
+    }
+
+    private void init() {
         setLayout(new MigLayout());
         putClientProperty("FlatLaf.style", "background : " + Palette.BACKGROUND_HEX);
         add(title, "gapleft 2, wrap");
-        add(field, "pushx, grow");
+        add(fieldContainer, "pushx, grow");
     }
 
     private String getMultiColorText(String title, boolean required) {
@@ -38,6 +43,7 @@ public class EntityAttrTextField extends JPanel {
     }
 
     // COMPONENTS
+    private final MenuTextField fieldContainer;
     private final JLabel title;
     private final String placeholder;
     private final JTextField field;

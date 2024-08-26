@@ -2,6 +2,7 @@ package com.cavenaire.notesmanager.view.menus.customers;
 
 import com.cavenaire.notesmanager.view.components.menus.MenuButton;
 import com.cavenaire.notesmanager.view.components.menus.textfield.EntityAttrTextField;
+import com.cavenaire.notesmanager.view.observer.Observable;
 import com.cavenaire.notesmanager.view.styles.Palette;
 
 import net.miginfocom.swing.MigLayout;
@@ -9,8 +10,12 @@ import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 
+/**
+ * AddCustomerFields Display Panel, it contains every text field that serves to fill a customer attribute. <br/>
+ * It shows a done button too.
+ */
 @Component
-public class AddCustomerFields extends JPanel {
+public class AddCustomerFields extends JPanel implements Observable<Void> {
 
     public AddCustomerFields(EntityAttrTextField fullNameField, EntityAttrTextField documentField, EntityAttrTextField addressField,
                              EntityAttrTextField contactField, EntityAttrTextField secondContactField, EntityAttrTextField dateField, MenuButton saveCustomer) {
@@ -22,6 +27,16 @@ public class AddCustomerFields extends JPanel {
         this.dateField = dateField;
         this.saveCustomer = saveCustomer;
         init();
+    }
+
+    @Override
+    public void update(Void object) {
+        fullNameField.resetField();
+        documentField.resetField();
+        addressField.resetField();
+        contactField.resetField();
+        secondContactField.resetField();
+        dateField.resetField();
     }
 
     private void init() {
