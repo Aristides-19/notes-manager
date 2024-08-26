@@ -9,6 +9,8 @@ import net.miginfocom.swing.MigLayout;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * AddCustomerFields Display Panel, it contains every text field that serves to fill a customer attribute. <br/>
@@ -36,7 +38,7 @@ public class AddCustomerFields extends JPanel implements Observable<Void> {
         addressField.resetField();
         contactField.resetField();
         secondContactField.resetField();
-        dateField.resetField();
+        dateField.showDefaultText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
     }
 
     private void init() {

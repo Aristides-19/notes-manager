@@ -62,34 +62,40 @@ public class CustomersConfig {
     @Bean
     public EntityAttrTextField fullNameField() {
         var fullNameField = new EntityAttrTextField("Nombre Completo", true, "John Doe");
-        addCustomerHandler.initFieldHandler(fullNameField, "fullName");
+        addCustomerHandler.initFieldHandler(fullNameField, "fullName", true);
         return fullNameField;
     }
 
     @Bean
     public EntityAttrTextField documentField() {
-        var documentField = new EntityAttrTextField("Documento", true, "XX.XXX.XXX");
-        addCustomerHandler.initFieldHandler(documentField, "document");
+        var documentField = new EntityAttrTextField("Documento", true, "12.345.678");
+        addCustomerHandler.initFieldHandler(documentField, "document", true);
         return documentField;
     }
 
     @Bean
     public EntityAttrTextField addressField() {
-        return new EntityAttrTextField("Dirección Completa", false, "Av. Francisco de Miranda, Chacao, Caracas, Distrito Capital");
+        return new EntityAttrTextField("Dirección Completa", false, "Av. Francisco de Miranda, Caracas, Distrito Capital");
     }
 
     @Bean
     public EntityAttrTextField contactField() {
-        return new EntityAttrTextField("Contacto Principal", false, "0424-XXXXXXX");
+        var contactField = new EntityAttrTextField("Contacto Principal", false, "0424-1234567");
+        addCustomerHandler.initFieldHandler(contactField, "contact", false);
+        return contactField;
     }
 
     @Bean
     public EntityAttrTextField secondContactField() {
-        return new EntityAttrTextField("Contacto Secundario", false, "0212-XXXXXXX");
+        var secContactField = new EntityAttrTextField("Contacto Secundario", false, "0212-1234567");
+        addCustomerHandler.initFieldHandler(secContactField, "contact", false);
+        return secContactField;
     }
 
     @Bean
     public EntityAttrTextField dateField() {
-        return new EntityAttrTextField("Fecha", true, "dd/mm/yyyy");
+        var dateField = new EntityAttrTextField("Fecha", false, "dd-mm-aaaa");
+        addCustomerHandler.initFieldHandler(dateField, "date", false);
+        return dateField;
     }
 }

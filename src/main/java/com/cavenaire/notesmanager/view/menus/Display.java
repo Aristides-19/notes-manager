@@ -12,7 +12,7 @@ import java.awt.event.ComponentEvent;
  * Display Template for Main Display.
  * It is intended to be a template for a {@code menu panel}.
  * So, basically every menu must be divided in two {@code subpanels}, both will push and grow. <br/>
- * It implements a {@code ComponentHidden} event to update {@code Observable} panels.
+ * It implements a {@code ComponentShown} event to update {@code Observable} panels.
  *
  * @see com.cavenaire.notesmanager.view.menus.MainDisplay
  */
@@ -34,7 +34,7 @@ public class Display extends JPanel {
 
         addComponentListener(new ComponentAdapter() {
             @Override
-            public void componentHidden(ComponentEvent e) {
+            public void componentShown(ComponentEvent e) {
                 if (Observable.class.isAssignableFrom(top.getClass())) {
                     ((Observable<?>) top).update(null);
                 }

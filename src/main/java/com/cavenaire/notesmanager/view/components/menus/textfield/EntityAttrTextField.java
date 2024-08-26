@@ -29,6 +29,11 @@ public class EntityAttrTextField extends JPanel {
         fieldContainer.placeholderMode();
     }
 
+    public void showDefaultText(String defaultText) {
+        fieldContainer.writingMode();
+        field.setText(defaultText);
+    }
+
     private void init() {
         setLayout(new MigLayout());
         putClientProperty("FlatLaf.style", "background : " + Palette.BACKGROUND_HEX);

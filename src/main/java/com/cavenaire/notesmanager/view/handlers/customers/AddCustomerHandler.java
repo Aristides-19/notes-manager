@@ -1,27 +1,46 @@
 package com.cavenaire.notesmanager.view.handlers.customers;
 
 import com.cavenaire.notesmanager.view.components.menus.textfield.EntityAttrTextField;
+import com.cavenaire.notesmanager.view.handlers.utils.ValidationUtils;
 
 import org.springframework.stereotype.Component;
 
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
+/**
+ * It takes care of init handling events for adding customer fields and validating data in fields.
+ */
 @Component
 public class AddCustomerHandler {
 
-    public void initFieldHandler(EntityAttrTextField b, String type) {
+    public void initFieldHandler(EntityAttrTextField b, String type, boolean required) {
         switch (type) {
-            case "fullName", "document" -> requiredField(b);
+            case "fullName" -> initFieldHandler(b, required, ValidationUtils::formatName, ValidationUtils::isNameValid);
+            case "document" -> initFieldHandler(b, required, ValidationUtils::formatDoc, ValidationUtils::isDocValid);
+            case "contact" -> initFieldHandler(b, required, ValidationUtils::formatContact, ValidationUtils::isContactValid);
+            case "date" -> initFieldHandler(b, required, ValidationUtils::formatDate, ValidationUtils::isDateValid);
         }
     }
 
-    private void requiredField(EntityAttrTextField b) {
+    private void initFieldHandler(EntityAttrTextField b, boolean required, Function<String, String> formatter, Predicate<String> validator) {
         b.getField().addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
                 var container = b.getFieldContainer();
-                if (container.isOnPlaceholder()) {
+                if (!container.isOnPlaceholder()) {
+                    String formatted = formatter.apply(b.getField().getText());
+                    b.getField().setText(formatted);
+                    if (validator.test(formatted)) {
+                        container.showRegularBorder();
+                    } else if (formatted.isEmpty() && !required) {
+                        b.resetField();
+                    } else {
+                        container.showErrorBorder();
+                    }
+                } else if (required) {
                     container.showErrorBorder();
                 } else {
                     container.showRegularBorder();
