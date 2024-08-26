@@ -1,8 +1,8 @@
 package com.cavenaire.notesmanager.view.components.menus.textfield;
 
 import com.cavenaire.notesmanager.view.styles.FontPalette;
-
 import com.cavenaire.notesmanager.view.styles.Palette;
+
 import lombok.Getter;
 import net.miginfocom.swing.MigLayout;
 
@@ -15,10 +15,11 @@ import javax.swing.*;
 @Getter
 public class EntityAttrTextField extends JPanel {
 
-    public EntityAttrTextField(String title, boolean required, String placeholder, int width, String... insets) {
-        var field = new MenuTextField(placeholder, width, insets);
+    public EntityAttrTextField(String title, boolean required, String placeholder) {
+        var field = new MenuTextField(placeholder, 0, "15", "15", "15", "15");
         this.field = field.getField();
         this.placeholder = field.getPlaceholder();
+        this.required = required;
         this.title = new JLabel(getMultiColorText(title, required));
         init(field);
     }
@@ -27,7 +28,7 @@ public class EntityAttrTextField extends JPanel {
         setLayout(new MigLayout());
         putClientProperty("FlatLaf.style", "background : " + Palette.BACKGROUND_HEX);
         add(title, "gapleft 2, wrap");
-        add(field);
+        add(field, "pushx, grow");
     }
 
     private String getMultiColorText(String title, boolean required) {
@@ -40,4 +41,5 @@ public class EntityAttrTextField extends JPanel {
     private final JLabel title;
     private final String placeholder;
     private final JTextField field;
+    private final boolean required;
 }

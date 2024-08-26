@@ -41,7 +41,7 @@ public class NavBarHandler {
                 changeSelection(b);
                 mainDisplay.onNotes();
             });
-            case "clients" -> b.addActionListener(e -> {
+            case "customers" -> b.addActionListener(e -> {
                 changeSelection(b);
                 controller.updateCustomers();
                 mainDisplay.onCustomers();

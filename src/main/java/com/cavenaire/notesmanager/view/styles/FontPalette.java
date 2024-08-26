@@ -16,6 +16,10 @@ public class FontPalette {
      */
     public static final Font HO0 = new Font("Satoshi Bold", Font.BOLD, 32);
     /**
+     * Satoshi Bold 28pt H01 Style
+     */
+    public static final Font H01 = new Font("Satoshi Bold", Font.BOLD, 28);
+    /**
      * Satoshi Bold 24pt H0 Style
      */
     public static final Font H0 = new Font("Satoshi Bold", Font.BOLD, 24);

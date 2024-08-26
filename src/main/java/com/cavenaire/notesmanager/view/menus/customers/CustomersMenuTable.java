@@ -20,11 +20,11 @@ import java.awt.*;
 @Component
 public class CustomersMenuTable extends JPanel {
 
-    public CustomersMenuTable(MenuTable<Customer> customersTable, SearchTextField searchCustomers, MenuButton addCustomer) {
+    public CustomersMenuTable(MenuTable<Customer> customersTable, SearchTextField searchCustomers, MenuButton addCustomerButton) {
         super();
         this.customersTable = customersTable;
         this.searchCustomers = searchCustomers;
-        this.addCustomer = addCustomer;
+        this.addCustomer = addCustomerButton;
         init();
     }
 

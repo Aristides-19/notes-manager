@@ -14,8 +14,8 @@ import java.awt.*;
 @Getter
 public class SearchTextField extends MenuTextField {
 
-    public SearchTextField(String text, int width, String... insets) {
-        super(text, width, insets);
+    public SearchTextField(String text, int width) {
+        super(text, width, "10", "15", "10", "15");
         this.actionIcon = new JButton(ICON);
         initIcon();
     }
