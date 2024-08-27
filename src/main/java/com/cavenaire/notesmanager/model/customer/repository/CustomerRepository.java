@@ -104,8 +104,6 @@ public class CustomerRepository implements EntityRepository<Customer> {
     public List<Customer> findAllByName(String query) {
         if (query.isEmpty()) {
             return findAll(25);
-        } else if (query.length() < 3) {
-            throw new DataAccessResourceFailureException("query must be longer than 2 characters");
         }
         String sql = "SELECT * FROM customers WHERE customer_id IN " +
                 "(SELECT rowid FROM trigram_customers WHERE full_name MATCH ?)";

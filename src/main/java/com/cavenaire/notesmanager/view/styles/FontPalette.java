@@ -43,4 +43,8 @@ public class FontPalette {
      * Satoshi Regular 16pt H3 Style
      */
     public static final Font H3_REG = new Font("Satoshi Regular", Font.PLAIN, 16);
+    /**
+     * Satoshi Regular 14pt H4 Style
+     */
+    public static final Font H4_REG = new Font("Satoshi Regular", Font.PLAIN, 14);
 }

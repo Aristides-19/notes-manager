@@ -35,20 +35,20 @@ public class Controller {
             dashboardObservable.updateNaturalsCount((Integer) result[2]);
             dashboardObservable.updateJuridicalsCount((Integer) result[3]);
             dashboardObservable.updateInvoicesCount((Integer) result[4]);
-        }, viewErrorNotifier, "No se pudo actualizar el menú principal, inténtalo de nuevo", "Failed to update dashboard").execute();
+        }, viewErrorNotifier, "No se pudo actualizar el menú principal, inténtalo de nuevo.", "Failed to update dashboard").execute();
     }
 
     public void updateCustomers() {
         new WorkerServiceHandler<>(() -> customerService.findAll(25),
                 customersObservable::updateCustomersTable, viewErrorNotifier,
-                "No se pudo actualizar la tabla de clientes, inténtalo de nuevo",
+                "No se pudo actualizar la tabla de clientes, inténtalo de nuevo.",
                 "Failed to update customers table").execute();
     }
 
     public void findCustomersByName(String query) {
         new WorkerServiceHandler<>(() -> customerService.findAllByName(query),
                 customersObservable::updateCustomersTable, viewErrorNotifier,
-                "No se pudo realizar la búsqueda, inténtalo de nuevo.\nRecuerda verificar que tu búsqueda contenga al menos 2 letras",
+                "No se pudo realizar la búsqueda, inténtalo de nuevo.",
                 "Failed to perform customers search by name").execute();
     }
 }
