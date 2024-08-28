@@ -14,7 +14,6 @@ import java.awt.event.*;
  * MenuTextField, it is a component with basic text field functionality.<br/>
  * It is intended to be extended for implementations like fields with title, or a search field.
  */
-@Getter
 public class MenuTextField extends JPanel {
 
     public MenuTextField(String placeholder, int width, String... insets) {
@@ -25,6 +24,22 @@ public class MenuTextField extends JPanel {
 
         initTextField();
         init(width, insets);
+    }
+
+    public String getText() {
+        return field.getText();
+    }
+
+    public void setText(String text) {
+        field.setText(text);
+    }
+
+    public void addActionListener(ActionListener l) {
+        field.addActionListener(l);
+    }
+
+    public void addFocusListener(FocusListener l) {
+        field.addFocusListener(l);
     }
 
     public void showErrorBorder() {
@@ -67,6 +82,7 @@ public class MenuTextField extends JPanel {
                 "; selectionColor : " + Palette.SECONDARY_BACKGROUND_HEX +
                 "; selectedTextColor : " + Palette.TEXT_FIELD_HEX +
                 "; caretColor : " + Palette.MAIN_HEX);
+        onPlaceholder = true;
 
         field.addFocusListener(new FocusAdapter() {
             @Override
@@ -88,6 +104,8 @@ public class MenuTextField extends JPanel {
     // COMPONENTS
     private final String placeholder;
     private final JTextField field;
+    @Getter
     private boolean onError;
+    @Getter
     private boolean onPlaceholder;
 }

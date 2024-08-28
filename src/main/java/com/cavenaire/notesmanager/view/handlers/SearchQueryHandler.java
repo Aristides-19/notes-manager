@@ -20,17 +20,16 @@ public class SearchQueryHandler {
     public void initHandler(SearchTextField field, String type) {
         switch (type) {
             case "customers" -> {
-                var textField = field.getField();
                 ActionListener event = (e) -> {
-                    var text = textField.getText();
+                    var text = field.getText();
                     if (text.length() < 3 && !text.isEmpty()) {
                         field.showErrorBorder();
                     } else {
                         field.showRegularBorder();
-                        controller.findCustomersByName(!text.equals(field.getPlaceholder()) ? text : "");
+                        controller.findCustomersByName(field.isOnPlaceholder() ? "" : text);
                     }
                 };
-                textField.addActionListener(event);
+                field.addActionListener(event);
                 field.getActionIcon().addActionListener(event);
             }
         }

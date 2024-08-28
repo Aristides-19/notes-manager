@@ -5,6 +5,7 @@ import com.cavenaire.notesmanager.view.components.menus.MenuButton;
 import com.cavenaire.notesmanager.view.components.menus.textfield.EntityAttrTextField;
 import com.cavenaire.notesmanager.view.components.menus.textfield.SearchTextField;
 import com.cavenaire.notesmanager.view.handlers.customers.AddCustomerHandler;
+import com.cavenaire.notesmanager.view.handlers.customers.CustomerDisplayHandler;
 import com.cavenaire.notesmanager.view.handlers.NestedDisplayHandler;
 import com.cavenaire.notesmanager.view.handlers.SearchQueryHandler;
 import com.cavenaire.notesmanager.view.table.models.CustomerTableModel;
@@ -23,6 +24,7 @@ public class CustomersConfig {
 
     private SearchQueryHandler queryHandler;
     private NestedDisplayHandler nestedDisplayHandler;
+    private CustomerDisplayHandler customerDisplayHandler;
     private AddCustomerHandler addCustomerHandler;
 
     @Bean
@@ -52,26 +54,28 @@ public class CustomersConfig {
     @Bean
     public MenuButton goBackCustomers() {
         var goBackButton = new MenuButton(new FlatSVGIcon("images/menus/corner-upleft.svg"), "Volver", 20);
-        addCustomerHandler.initBack(goBackButton);
+        customerDisplayHandler.initBack(goBackButton);
         return goBackButton;
     }
 
     @Bean
     public MenuButton saveCustomer() {
-        return new MenuButton(new FlatSVGIcon("images/menus/check.svg"), "Finalizar", 15);
+        var saveButton = new MenuButton(new FlatSVGIcon("images/menus/check.svg"), "Finalizar", 15);
+        addCustomerHandler.initHandler(saveButton);
+        return saveButton;
     }
 
     @Bean
     public EntityAttrTextField fullNameField() {
         var fullNameField = new EntityAttrTextField("Nombre Completo", true, "John Doe");
-        addCustomerHandler.initFieldHandler(fullNameField, "fullName", true);
+        customerDisplayHandler.initFieldHandler(fullNameField, "fullName");
         return fullNameField;
     }
 
     @Bean
     public EntityAttrTextField documentField() {
         var documentField = new EntityAttrTextField("Documento", true, "12.345.678");
-        addCustomerHandler.initFieldHandler(documentField, "document", true);
+        customerDisplayHandler.initFieldHandler(documentField, "document");
         return documentField;
     }
 
@@ -83,21 +87,21 @@ public class CustomersConfig {
     @Bean
     public EntityAttrTextField contactField() {
         var contactField = new EntityAttrTextField("Contacto Principal", false, "0424-1234567");
-        addCustomerHandler.initFieldHandler(contactField, "contact", false);
+        customerDisplayHandler.initFieldHandler(contactField, "contact");
         return contactField;
     }
 
     @Bean
     public EntityAttrTextField secondContactField() {
         var secContactField = new EntityAttrTextField("Contacto Secundario", false, "0212-1234567");
-        addCustomerHandler.initFieldHandler(secContactField, "contact", false);
+        customerDisplayHandler.initFieldHandler(secContactField, "contact");
         return secContactField;
     }
 
     @Bean
     public EntityAttrTextField dateField() {
         var dateField = new EntityAttrTextField("Fecha", false, "dd-mm-aaaa");
-        addCustomerHandler.initFieldHandler(dateField, "date", false);
+        customerDisplayHandler.initFieldHandler(dateField, "date");
         return dateField;
     }
 }
