@@ -31,6 +31,7 @@ public class CustomerDisplayHandler {
         switch (type) {
             case "fullName" -> initFieldHandler(field, ValidationUtils::formatName, ValidationUtils::isNameValid);
             case "document" -> initFieldHandler(field, ValidationUtils::formatDoc, ValidationUtils::isDocValid);
+            case "address" -> initFieldHandler(field, ValidationUtils::formatAddress, (s) -> true);
             case "contact" -> initFieldHandler(field, ValidationUtils::formatContact, ValidationUtils::isContactValid);
             case "date" -> initFieldHandler(field, ValidationUtils::formatDate, ValidationUtils::isDateValid);
         }

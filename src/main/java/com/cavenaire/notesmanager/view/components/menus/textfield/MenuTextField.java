@@ -27,7 +27,7 @@ public class MenuTextField extends JPanel {
     }
 
     public String getText() {
-        return field.getText();
+        return onPlaceholder ? "" : field.getText();
     }
 
     public void setText(String text) {

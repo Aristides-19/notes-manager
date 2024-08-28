@@ -13,7 +13,11 @@ public class ValidationUtils {
 
     static public String formatName(String name) {
         return Arrays.stream(name.split(" "))
-                .map((w) -> w.isEmpty() ? w : Character.toTitleCase(w.charAt(0)) + w.substring(1).toLowerCase())
+                .map(w -> {
+                    if (w.isEmpty()) return w;
+                    if (w.matches("(?i)c\\.?a\\.?\\.?")) return "C.A.";
+                    return Character.toTitleCase(w.charAt(0)) + w.substring(1).toLowerCase();
+                })
                 .collect(Collectors.joining(" "));
     }
 
@@ -36,6 +40,10 @@ public class ValidationUtils {
         return length >= 7 && length <= 9;
     }
 
+    static public String formatAddress(String address) {
+        return formatName(address);
+    }
+
     static public String formatContact(String contact) {
         var normalizedPhone = contact.replaceAll("\\D", "");
         return switch (normalizedPhone.length()) {
@@ -53,10 +61,7 @@ public class ValidationUtils {
 
     static public String formatDate(String date) {
         var normalizedDate = date.replaceAll("\\D", "");
-        return switch (normalizedDate.length()) {
-            case 8 -> normalizedDate.replaceFirst("(\\d{2})(\\d{2})(\\d{4})", "$1-$2-$3");
-            default -> normalizedDate;
-        };
+        return normalizedDate.length() == 8 ? normalizedDate.replaceFirst("(\\d{2})(\\d{2})(\\d{4})", "$1-$2-$3") : normalizedDate;
     }
 
     static public boolean isDateValid(String date) {

@@ -3,7 +3,7 @@ package com.cavenaire.notesmanager.controller;
 import com.cavenaire.notesmanager.model.customer.Customer;
 import com.cavenaire.notesmanager.model.customer.service.CustomerService;
 import com.cavenaire.notesmanager.model.invoicerecord.service.InvoiceService;
-import com.cavenaire.notesmanager.view.observer.ErrorNotifier;
+import com.cavenaire.notesmanager.view.observer.Notifier;
 import com.cavenaire.notesmanager.view.observer.menus.CustomersObservable;
 import com.cavenaire.notesmanager.view.observer.menus.DashboardObservable;
 
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class Controller {
 
-    private final ErrorNotifier viewErrorNotifier;
+    private final Notifier viewNotifier;
     // SERVICES
     private final CustomerService customerService;
     private final InvoiceService invoiceService;
@@ -35,19 +35,25 @@ public class Controller {
             dashboardObservable.updateNaturalsCount((Integer) result[2]);
             dashboardObservable.updateJuridicalsCount((Integer) result[3]);
             dashboardObservable.updateInvoicesCount((Integer) result[4]);
-        }, viewErrorNotifier, "No se pudo actualizar el menú principal, inténtalo de nuevo.", "Failed to update dashboard").execute();
+        }, viewNotifier, "No se pudo actualizar el menú principal, inténtalo de nuevo.", "Failed to update dashboard").execute();
+    }
+
+    public void saveCustomer(Customer customer) {
+        new WorkerServiceHandler<>(() -> customerService.save(customer), (result) -> updateCustomers(), viewNotifier,
+                "No se pudo añadir el cliente, inténtalo de nuevo. ¡Posiblemente el cliente ya existe!",
+                "Failed to save a customer", "El cliente se agregó correctamente.").execute();
     }
 
     public void updateCustomers() {
         new WorkerServiceHandler<>(() -> customerService.findAll(25),
-                customersObservable::updateCustomersTable, viewErrorNotifier,
+                customersObservable::updateCustomersTable, viewNotifier,
                 "No se pudo actualizar la tabla de clientes, inténtalo de nuevo.",
                 "Failed to update customers table").execute();
     }
 
     public void findCustomersByName(String query) {
         new WorkerServiceHandler<>(() -> customerService.findAllByName(query),
-                customersObservable::updateCustomersTable, viewErrorNotifier,
+                customersObservable::updateCustomersTable, viewNotifier,
                 "No se pudo realizar la búsqueda, inténtalo de nuevo.",
                 "Failed to perform customers search by name").execute();
     }

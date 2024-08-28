@@ -60,7 +60,7 @@ public class CustomersConfig {
 
     @Bean
     public MenuButton saveCustomer() {
-        var saveButton = new MenuButton(new FlatSVGIcon("images/menus/check.svg"), "Finalizar", 15);
+        var saveButton = new MenuButton(new FlatSVGIcon("images/menus/check.svg"), "Guardar", 15);
         addCustomerHandler.initHandler(saveButton);
         return saveButton;
     }
@@ -81,7 +81,9 @@ public class CustomersConfig {
 
     @Bean
     public EntityAttrTextField addressField() {
-        return new EntityAttrTextField("Dirección Completa", false, "Av. Francisco de Miranda, Caracas, Distrito Capital");
+        var addressField = new EntityAttrTextField("Dirección Completa", false, "Av. Francisco de Miranda, Caracas, Distrito Capital");
+        customerDisplayHandler.initFieldHandler(addressField, "address");
+        return addressField;
     }
 
     @Bean

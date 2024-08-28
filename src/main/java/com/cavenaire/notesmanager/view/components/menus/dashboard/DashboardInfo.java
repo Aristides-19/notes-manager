@@ -29,6 +29,7 @@ public class DashboardInfo extends JPanel implements Observable<Customer> {
             contact.setText(getMultiText("Contacto", customer.getContact()));
             document.setText(getMultiText("Documento", customer.getDocument()));
             address.setText(getMultiText("Dirección", truncateString(customer.getAddress(), 35)));
+            title.setText("Último Cliente");
         } catch (NullPointerException e) {
             title.setText("¡Agrega tu Primer Cliente!");
         }
@@ -68,8 +69,7 @@ public class DashboardInfo extends JPanel implements Observable<Customer> {
     }
 
     private String getMultiText(String title, String info) {
-        // HTML is only used here because it is the simplest way to get two fonts on the same JLabel
-        return "<html><span style='font-family: " + FontPalette.FAMILY + "; font-weight: bold; font-size: 17pt;'>" +
+        return info.isEmpty() ? "" : "<html><span style='font-family: " + FontPalette.FAMILY + "; font-weight: bold; font-size: 17pt;'>" +
                 title + "</span><br><span style='font-family: " + FontPalette.FAMILY + "; font-size: 17pt;'>" +
                 info + "</span></html>";
     }
