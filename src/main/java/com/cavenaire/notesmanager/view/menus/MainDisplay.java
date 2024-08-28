@@ -1,5 +1,7 @@
 package com.cavenaire.notesmanager.view.menus;
 
+import lombok.Getter;
+import lombok.experimental.Accessors;
 import net.miginfocom.swing.MigLayout;
 import org.springframework.stereotype.Component;
 
@@ -44,30 +46,37 @@ public class MainDisplay extends JPanel {
     }
 
     public void onMenu() {
+        needsConfirmation = false;
         change(dashboard);
     }
 
     public void onInvoices() {
+        needsConfirmation = false;
         change(invoices);
     }
 
     public void onNotes() {
+        needsConfirmation = false;
         change(notes);
     }
 
     public void onCustomers() {
+        needsConfirmation = false;
         change(customers);
     }
 
     public void onSettings() {
+        needsConfirmation = false;
         change(settings);
     }
 
     public void onHelp() {
+        needsConfirmation = false;
         change(help);
     }
 
     public void onAddCustomer() {
+        needsConfirmation = true;
         change(addCustomer);
     }
 
@@ -90,6 +99,9 @@ public class MainDisplay extends JPanel {
     private final Display addCustomer;
 
     // VARIABLES
+    @Getter
+    @Accessors(fluent = true)
+    private boolean needsConfirmation;
     private Display selected;
     private MigLayout layout;
 }

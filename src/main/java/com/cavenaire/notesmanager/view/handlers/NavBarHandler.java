@@ -4,6 +4,9 @@ import com.cavenaire.notesmanager.controller.Controller;
 import com.cavenaire.notesmanager.view.menus.MainDisplay;
 import com.cavenaire.notesmanager.view.components.bars.NavButton;
 
+import static com.cavenaire.notesmanager.view.handlers.utils.CheckDisplayConfirmation.*;
+
+import com.cavenaire.notesmanager.view.ui.dialogs.MainDialog;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -19,6 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class NavBarHandler {
 
+    private MainDialog dialog;
     private MainDisplay mainDisplay;
     private Controller controller;
 
@@ -28,32 +32,32 @@ public class NavBarHandler {
         }
 
         switch (type) {
-            case "menu" -> b.addActionListener(e -> {
+            case "menu" -> b.addActionListener(e -> checkConfirmation(() -> {
                 changeSelection(b);
                 controller.updateDashboard();
                 mainDisplay.onMenu();
-            });
-            case "invoices" -> b.addActionListener(e -> {
+            }, mainDisplay, dialog));
+            case "invoices" -> b.addActionListener(e -> checkConfirmation(() -> {
                 changeSelection(b);
                 mainDisplay.onInvoices();
-            });
-            case "notes" -> b.addActionListener(e -> {
+            }, mainDisplay, dialog));
+            case "notes" -> b.addActionListener(e -> checkConfirmation(() -> {
                 changeSelection(b);
                 mainDisplay.onNotes();
-            });
-            case "customers" -> b.addActionListener(e -> {
+            }, mainDisplay, dialog));
+            case "customers" -> b.addActionListener(e -> checkConfirmation(() -> {
                 changeSelection(b);
                 controller.updateCustomers();
                 mainDisplay.onCustomers();
-            });
-            case "settings" -> b.addActionListener(e -> {
+            }, mainDisplay, dialog));
+            case "settings" -> b.addActionListener(e -> checkConfirmation(() -> {
                 changeSelection(b);
                 mainDisplay.onSettings();
-            });
-            case "help" -> b.addActionListener(e -> {
+            }, mainDisplay, dialog));
+            case "help" -> b.addActionListener(e -> checkConfirmation(() -> {
                 changeSelection(b);
                 mainDisplay.onHelp();
-            });
+            }, mainDisplay, dialog));
         }
     }
 

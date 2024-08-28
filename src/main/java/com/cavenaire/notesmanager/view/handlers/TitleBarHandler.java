@@ -2,6 +2,7 @@ package com.cavenaire.notesmanager.view.handlers;
 
 import com.cavenaire.notesmanager.view.components.bars.TitleButton;
 import com.cavenaire.notesmanager.view.ui.MainUI;
+import com.cavenaire.notesmanager.view.ui.dialogs.MainDialog;
 
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Component;
 public class TitleBarHandler {
 
     private MainUI mainUI;
+    private MainDialog dialog;
 
     public void initHandler(TitleButton b, String type) {
         switch (type) {
@@ -38,7 +40,10 @@ public class TitleBarHandler {
     }
 
     private void onClose() {
-        System.exit(0);
+        boolean result = dialog.onDialog("¿Estás seguro que deseas salir?", MainDialog.ACCEPT_CANCEL_OPTION);
+        if (result) {
+            System.exit(0);
+        }
     }
 
     private void onMaximize() {

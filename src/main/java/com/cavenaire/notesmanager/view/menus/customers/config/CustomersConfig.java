@@ -51,7 +51,9 @@ public class CustomersConfig {
 
     @Bean
     public MenuButton goBackCustomers() {
-        return new MenuButton(new FlatSVGIcon("images/menus/corner-upleft.svg"), "Volver", 20);
+        var goBackButton = new MenuButton(new FlatSVGIcon("images/menus/corner-upleft.svg"), "Volver", 20);
+        addCustomerHandler.initBack(goBackButton);
+        return goBackButton;
     }
 
     @Bean
