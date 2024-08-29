@@ -48,7 +48,8 @@ public class ValidationUtils {
         var normalizedPhone = contact.replaceAll("\\D", "");
         return switch (normalizedPhone.length()) {
             case 11 -> normalizedPhone.replaceFirst("(\\d{4})(\\d{7})", "$1-$2");
-            case 10 -> normalizedPhone.replaceFirst("(\\d{4})(\\d{7})", "0$1-$2");
+            case 10 -> normalizedPhone.replaceFirst("(\\d{3})(\\d{7})", "0$1-$2");
+            case 7 -> "0212-" + normalizedPhone;
             default -> normalizedPhone;
         };
     }
@@ -56,7 +57,7 @@ public class ValidationUtils {
     static public boolean isContactValid(String contact) {
         var normalizedPhone = contact.replaceAll("\\D", "");
         int length = normalizedPhone.length();
-        return length == 7 || (length == 11 && (normalizedPhone.startsWith("02") || normalizedPhone.startsWith("04")));
+        return length == 11 && (normalizedPhone.startsWith("02") || normalizedPhone.startsWith("04"));
     }
 
     static public String formatDate(String date) {

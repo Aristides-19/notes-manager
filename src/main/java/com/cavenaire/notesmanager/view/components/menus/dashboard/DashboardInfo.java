@@ -69,7 +69,10 @@ public class DashboardInfo extends JPanel implements Observable<Customer> {
     }
 
     private String getMultiText(String title, String info) {
-        return info.isEmpty() ? "" : "<html><span style='font-family: " + FontPalette.FAMILY + "; font-weight: bold; font-size: 17pt;'>" +
+        if (info.isEmpty()) {
+            info = "No Disponible";
+        }
+        return "<html><span style='font-family: " + FontPalette.FAMILY + "; font-weight: bold; font-size: 17pt;'>" +
                 title + "</span><br><span style='font-family: " + FontPalette.FAMILY + "; font-size: 17pt;'>" +
                 info + "</span></html>";
     }

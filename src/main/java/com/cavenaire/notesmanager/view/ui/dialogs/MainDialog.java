@@ -29,6 +29,7 @@ public class MainDialog extends JDialog {
     }
 
     public boolean onDialog(String message, int options) {
+        setLocationRelativeTo(getOwner());
         this.message.setText(message);
         panel.remove(cancelButton);
         panel.remove(okButton);
@@ -39,6 +40,7 @@ public class MainDialog extends JDialog {
                 panel.add(okButton, "bottom, gapright 30, gapbottom 15");
             }
         }
+        EventQueue.invokeLater(okButton::requestFocusInWindow);
         setVisible(true);
         return isOkay;
     }
@@ -46,7 +48,6 @@ public class MainDialog extends JDialog {
     private void init() {
         setMinimumSize(new Dimension(450, 163));
         setUndecorated(true);
-        setLocationRelativeTo(null);
         add(panel);
 
         panel.setLayout(new MigLayout("insets 20 20 20 20"));

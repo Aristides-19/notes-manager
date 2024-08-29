@@ -5,8 +5,7 @@ import com.cavenaire.notesmanager.view.observer.Notifier;
 
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.swing.*;
 import java.util.concurrent.ExecutionException;
@@ -15,12 +14,12 @@ import java.util.function.Supplier;
 
 @AllArgsConstructor
 @RequiredArgsConstructor
+@Slf4j
 public class WorkerServiceHandler<T> extends SwingWorker<T, Void> {
 
     private final Supplier<T> backgroundTask;
     private final Consumer<T> doneTask;
     private final Notifier viewNotifier;
-    private final Logger logger = LoggerFactory.getLogger(WorkerServiceHandler.class);
     private final String viewMessage;
     private final String logMessage;
     private String confirmationMessage;
@@ -42,10 +41,10 @@ public class WorkerServiceHandler<T> extends SwingWorker<T, Void> {
             Throwable cause = e.getCause();
             if (cause instanceof ServiceLayerException) {
                 viewNotifier.notify(viewMessage);
-                logger.error(logMessage, cause);
+                log.error(logMessage, cause);
             } else {
                 viewNotifier.notify("Error inesperado, si el error persiste notifica al desarrollador.");
-                logger.error("Worker Thread Exception, most likely to be a programmer error", e);
+                log.error("Worker Thread Exception, most likely to be a programmer error", e);
             }
         }
     }

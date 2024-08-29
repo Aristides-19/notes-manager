@@ -1,6 +1,6 @@
 package com.cavenaire.notesmanager.view.utils;
 
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -13,6 +13,7 @@ import java.util.Objects;
 /**
  * IconLoader static class to load icon.
  */
+@Slf4j
 public class IconLoader {
 
     static public Image loadIcon() {
@@ -23,7 +24,7 @@ public class IconLoader {
             return new ImageIcon(buffIcon).getImage();
 
         } catch (NullPointerException | IOException e) {
-            LoggerFactory.getLogger(IconLoader.class).warn("Icon cannot be loaded", e);
+            log.warn("Icon cannot be loaded", e);
         }
 
         return new ImageIcon().getImage();

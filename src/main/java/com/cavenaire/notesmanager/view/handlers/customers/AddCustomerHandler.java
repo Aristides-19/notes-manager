@@ -5,6 +5,7 @@ import com.cavenaire.notesmanager.model.customer.Customer;
 import com.cavenaire.notesmanager.view.components.menus.MenuButton;
 import com.cavenaire.notesmanager.view.components.menus.textfield.EntityAttrTextField;
 import com.cavenaire.notesmanager.view.menus.MainDisplay;
+import com.cavenaire.notesmanager.view.ui.dialogs.MainDialog;
 
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * It handles the AddCustomer event to save the customer with {@code Controller}
+ *
+ * @see EntityAttrTextField
  */
 @Setter(onMethod_ = @Autowired, onParam_ = @Lazy)
 @Component
@@ -31,12 +34,15 @@ public class AddCustomerHandler {
     private EntityAttrTextField dateField;
     private Controller controller;
     private MainDisplay mainDisplay;
+    private MainDialog dialog;
 
     public void initHandler(MenuButton b) {
         b.addActionListener(e -> {
             if (areFieldsValid()) {
                 controller.saveCustomer(createCustomerFromFields());
                 mainDisplay.onCustomers();
+            } else {
+                dialog.onDialog("¡No has llenado los campos correctamente!", MainDialog.ACCEPT_OPTION);
             }
         });
     }
@@ -54,7 +60,7 @@ public class AddCustomerHandler {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return Customer.builder()
                 .fullName(fullNameField.getText())
-                .document(documentField.getText())
+                .document(documentField.getSelected() + "-" + documentField.getText())
                 .address(addressField.getText())
                 .contact(contactField.getText())
                 .secondContact(secondContactField.getText())

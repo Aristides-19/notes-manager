@@ -74,7 +74,7 @@ public class CustomersConfig {
 
     @Bean
     public EntityAttrTextField documentField() {
-        var documentField = new EntityAttrTextField("Documento", true, "12.345.678");
+        var documentField = new EntityAttrTextField("Documento", true, "12.345.678", "V", "J");
         customerDisplayHandler.initFieldHandler(documentField, "document");
         return documentField;
     }

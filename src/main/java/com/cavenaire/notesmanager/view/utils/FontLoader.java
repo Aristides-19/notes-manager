@@ -1,6 +1,6 @@
 package com.cavenaire.notesmanager.view.utils;
 
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.awt.*;
 import java.io.IOException;
@@ -10,6 +10,7 @@ import java.util.Objects;
 /**
  * FontLoader static class to load Satoshi variants font.
  */
+@Slf4j
 public class FontLoader {
 
     /**
@@ -30,7 +31,7 @@ public class FontLoader {
             GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(regular);
 
         } catch (IOException | FontFormatException e) {
-            LoggerFactory.getLogger(FontLoader.class).error("Font cannot be loaded", e);
+            log.error("Font cannot be loaded", e);
         }
 
     }
