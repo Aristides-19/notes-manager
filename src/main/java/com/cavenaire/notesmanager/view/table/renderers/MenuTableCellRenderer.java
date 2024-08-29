@@ -1,4 +1,4 @@
-package com.cavenaire.notesmanager.view.table;
+package com.cavenaire.notesmanager.view.table.renderers;
 
 import com.cavenaire.notesmanager.view.styles.Palette;
 
@@ -6,6 +6,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 
+/**
+ * It renders cells from {@code MenuTable}
+ */
 public class MenuTableCellRenderer extends DefaultTableCellRenderer {
 
     public final Font font;

@@ -1,15 +1,13 @@
-package com.cavenaire.notesmanager.view.handlers.utils;
+package com.cavenaire.notesmanager.view.utils;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- * It provides static methods to valid data for adding entity fields.
+ * It provides static methods to format models states/atrributes.
  */
-public class ValidationUtils {
+public class Formatter {
 
     static public String formatName(String name) {
         return Arrays.stream(name.split(" "))
@@ -21,10 +19,6 @@ public class ValidationUtils {
                 .collect(Collectors.joining(" "));
     }
 
-    static public boolean isNameValid(String name) {
-        return name.split(" ").length > 1;
-    }
-
     static public String formatDoc(String doc) {
         var normalizedDoc = doc.replaceAll("\\D", "");
         return switch (normalizedDoc.length()) {
@@ -32,16 +26,6 @@ public class ValidationUtils {
             case 9 -> normalizedDoc.replaceFirst("(\\d{8})(\\d)", "$1-$2");
             default -> normalizedDoc;
         };
-    }
-
-    static public boolean isDocValid(String doc) {
-        var normalizedDoc = doc.replaceAll("\\D", "");
-        int length = normalizedDoc.length();
-        return length >= 7 && length <= 9;
-    }
-
-    static public String formatAddress(String address) {
-        return formatName(address);
     }
 
     static public String formatContact(String contact) {
@@ -54,10 +38,8 @@ public class ValidationUtils {
         };
     }
 
-    static public boolean isContactValid(String contact) {
-        var normalizedPhone = contact.replaceAll("\\D", "");
-        int length = normalizedPhone.length();
-        return length == 11 && (normalizedPhone.startsWith("02") || normalizedPhone.startsWith("04"));
+    static public String formatAddress(String address) {
+        return formatName(address);
     }
 
     static public String formatDate(String date) {
@@ -65,12 +47,15 @@ public class ValidationUtils {
         return normalizedDate.length() == 8 ? normalizedDate.replaceFirst("(\\d{2})(\\d{2})(\\d{4})", "$1-$2-$3") : normalizedDate;
     }
 
-    static public boolean isDateValid(String date) {
-        try {
-            LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
+    static public String formatBsCurrency(double amount) {
+        return "Bs. " + CURRENCY_FORMATTER.format(amount);
     }
+
+    private static final NumberFormat CURRENCY_FORMATTER;
+
+    static {
+        CURRENCY_FORMATTER = NumberFormat.getNumberInstance();
+        CURRENCY_FORMATTER.setMaximumFractionDigits(2);
+    }
+
 }

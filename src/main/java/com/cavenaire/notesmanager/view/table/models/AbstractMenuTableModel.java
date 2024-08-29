@@ -37,6 +37,11 @@ public abstract class AbstractMenuTableModel<T> extends AbstractTableModel {
         return null;
     }
 
+    public int getStatusColumnIndex() {
+        // override it if the model needs a status column to render
+        return -1;
+    }
+
     public void setRows(List<T> rows) {
         this.rows = rows;
         fireTableDataChanged();

@@ -7,6 +7,8 @@ import com.cavenaire.notesmanager.view.menus.customers.CustomersMenuTable;
 import com.cavenaire.notesmanager.view.menus.customers.CustomersTaskBar;
 import com.cavenaire.notesmanager.view.menus.dashboard.Counters;
 import com.cavenaire.notesmanager.view.menus.dashboard.DashTaskBar;
+import com.cavenaire.notesmanager.view.menus.invoices.InvoicesMenuTable;
+import com.cavenaire.notesmanager.view.menus.invoices.InvoicesTaskBar;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,8 +27,8 @@ public class DisplayConfig {
     }
 
     @Bean
-    public Display invoices() {
-        return new Display(new JLabel("Facturas"), new JLabel());
+    public Display invoices(InvoicesTaskBar itb, InvoicesMenuTable imt) {
+        return new Display(itb, imt);
     }
 
     @Bean

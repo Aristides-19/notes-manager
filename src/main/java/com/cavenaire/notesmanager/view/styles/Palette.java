@@ -51,4 +51,12 @@ public class Palette {
      */
     public static Color ERROR_BORDER = new Color(255, 0, 0, 75);
     public static String ERROR_BORDER_HEX = "#FF00004B";
+    /**
+     * FINISHED color, to show finished status on tables.
+     */
+    public static Color FINISHED = new Color(36, 174, 91, 230);
+    /**
+     * DRAFT color, to show draft status on tables.
+     */
+    public static Color DRAFT = new Color(172, 182, 27, 230);
 }
