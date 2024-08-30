@@ -94,7 +94,7 @@ public class MenuTextField extends JPanel {
 
             @Override
             public void focusGained(FocusEvent e) {
-                if (field.getText().equals(placeholder)) {
+                if (onPlaceholder) {
                     writingMode();
                 }
             }

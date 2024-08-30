@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
 public class Validator {
 
     static public boolean checkFullName(String name) {
-        return name.split(" ").length > 1;
+        return name.split("\\s+").length > 1;
     }
 
     static public boolean checkDocument(String doc) {

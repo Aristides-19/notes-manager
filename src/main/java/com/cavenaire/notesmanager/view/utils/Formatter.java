@@ -2,6 +2,7 @@ package com.cavenaire.notesmanager.view.utils;
 
 import java.text.NumberFormat;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -10,9 +11,8 @@ import java.util.stream.Collectors;
 public class Formatter {
 
     static public String formatName(String name) {
-        return Arrays.stream(name.split(" "))
+        return Arrays.stream(name.strip().split("\\s+"))
                 .map(w -> {
-                    if (w.isEmpty()) return w;
                     if (w.matches("(?i)c\\.?a\\.?\\.?")) return "C.A.";
                     return Character.toTitleCase(w.charAt(0)) + w.substring(1).toLowerCase();
                 })
@@ -39,7 +39,12 @@ public class Formatter {
     }
 
     static public String formatAddress(String address) {
-        return formatName(address);
+        return Arrays.stream(address.strip().split("\\s+"))
+                .map(w -> {
+                    if (NON_FORMATABLE_ADDRESS.matcher(w).matches()) return w.toLowerCase();
+                    return Character.toTitleCase(w.charAt(0)) + w.substring(1).toLowerCase();
+                })
+                .collect(Collectors.joining(" "));
     }
 
     static public String formatDate(String date) {
@@ -51,6 +56,7 @@ public class Formatter {
         return "Bs. " + CURRENCY_FORMATTER.format(amount);
     }
 
+    private static final Pattern NON_FORMATABLE_ADDRESS = Pattern.compile("\\b(?:de|del|y|en|con|entre|a|hacia|por|sobre|tras|para|frente)\\b", Pattern.CASE_INSENSITIVE);
     private static final NumberFormat CURRENCY_FORMATTER;
 
     static {
